@@ -1,6 +1,6 @@
 ## Documentation for PI Web API top level object
 
-- [PIWebApiClient](docs/PIWebApiClient.md)
+- [PIWebAPIService](docs/PIWebAPIService.md)
 
 ## Documentation for API Endpoints
 

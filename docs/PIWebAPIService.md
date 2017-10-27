@@ -1,16 +1,16 @@
-# PIWebApi
+# PIWebAPIService
 
-## **ConfigureInstance**
-> ConfigureInstance(basePath: string, useKerberos: boolean, username?: string, password?: string)
+## **configureInstance**
+> configureInstance(basePath: string, useKerberos: boolean, username?: string, password?: string)
 
-Creates an instance of the PI Web API client top level object. The parameter useKerberos = false is for Basic Authentication. You must use angular-piwebapi.js or piwebapi.min.js to use the option. Note that piwebapi-kerberos.js should be used for Kerberos only.
+Creates an instance of the PI Web API client top level object. The parameter useKerberos = true for Kerberos authentication. For Basic Authentication, useKerberos = false with the username and password.
 
 ### Parameters
 
 Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
 **baseUrl** | **string**| PI Web API base service url. | [required]
-**useKerberos** | **boolean**| Select True for Kerberos auth or False for Basic auth. | [required]
+**useKerberos** | **boolean**| Select true for Kerberos auth or false for Basic auth. | [required]
 **username** | **string**| The username for basic authentication to authenticate against PI Web API. 
 **password** | **string**| The password for basic authentication to authenticate against PI Web API. 
 
