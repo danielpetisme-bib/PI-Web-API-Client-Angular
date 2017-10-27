@@ -64,19 +64,19 @@ If you want to use basic authentication instead of Kerberos, set useKerberos to 
 #### Basic authentication
 
 ```typescript
-	this.piWebApiHttpService.configureInstance("https://devdata.osisoft.com/piwebapi/", false, "username", "password");
+    this.piWebApiHttpService.configureInstance("https://devdata.osisoft.com/piwebapi/", false, "username", "password");
 ``` 
 
 #### Kerberos authentication
 
 ```typescript
-	this.piWebApiHttpService.configureInstance("https://devdata.osisoft.com/piwebapi/", true);
+    this.piWebApiHttpService.configureInstance("https://devdata.osisoft.com/piwebapi/", true);
 ``` 
 
 If you want to test if it connects, just execute the code below:
 
 ```typescript
-	this.piWebApiHttpService.home.get().subscribe(res => {
+    this.piWebApiHttpService.home.get().subscribe(res => {
         console.log(res);
     }, error => {
         console.log(error.json());
@@ -96,7 +96,7 @@ If you want to test if it connects, just execute the code below:
 ### Create a new PI Point
 
 ```typescript
-	var pointName = "SINUSOID_TEST74" + Math.trunc(100000*Math.random());
+    var pointName = "SINUSOID_TEST74" + Math.trunc(100000*Math.random());
     var newPoint = new PIPoint(null, null, pointName, null, "Test PI Point for Angular PI Web API Client", "classic", "float32", null, null, null, false);    
     this.piWebApiHttpService.dataServer.createPoint(res.WebId, newPoint).subscribe(res => {
 		console.log(res);
@@ -197,7 +197,7 @@ If you want to test if it connects, just execute the code below:
 ### Using PI Web API Batch
 
 ```typescript
-	var pirequest = {};
+    var pirequest = {};
     pirequest["4"] = {
         "Method": "GET",
         "Resource": "https://marc-web-sql.marc.net/piwebapi/points?path=\\\\MARC-PI2016\\sinusoid",
