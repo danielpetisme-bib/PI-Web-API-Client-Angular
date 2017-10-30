@@ -4,7 +4,7 @@ PI Web API Client libraries for Angular 4
 ## Overview
 This repository has the source code package of the PI Web API Client libraries for Angular 4.
 
-It was created following the steps described in this blog post published on PI Square: https://pisquare.osisoft.com/community/developers-club/blog/2017/04/06/generating-pi-web-api-client-libraries-for-angularjs-using-swagger
+It was created following the steps described in this blog post published on PI Square: https://pisquare.osisoft.com/community/developers-club/blog/2017/10/30/announcing-pi-web-api-client-library-for-angular
 
 
 ## Requirements.
