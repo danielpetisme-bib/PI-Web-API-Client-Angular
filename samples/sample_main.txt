@@ -39,8 +39,7 @@ import { PIWebAPIService, PIItemsStreamValues, PIPoint, PITimedValue, PIStreamVa
     webIds.push(point1webId);
     webIds.push(point2webId);
     webIds.push(point3webId);
-
-    this.piWebApiHttpService.streamSet.getRecordedAdHoc(webIds, null, "*", null, true, 1000, null, "*-3d", null).subscribe(res => {
+    this.piWebApiHttpService.streamSet.getRecordedAdHoc(webIds, null, "*", null, true, 1000, null, null, null, "*-3d", null).subscribe(res => {
         console.log(res);
     }, error => {
         console.log(error.json());
