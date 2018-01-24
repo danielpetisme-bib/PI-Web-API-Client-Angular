@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class SecurityMappingApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class SecurityMappingApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityMapping>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityMapping>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class SecurityMappingApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securitymappings';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class SecurityMappingApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class SecurityMappingApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityMapping>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityMapping>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class SecurityMappingApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securitymappings/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class SecurityMappingApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class SecurityMappingApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class SecurityMappingApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securitymappings/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -263,6 +271,10 @@ export class SecurityMappingApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -276,8 +288,8 @@ export class SecurityMappingApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -290,7 +302,7 @@ export class SecurityMappingApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securitymappings/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -309,6 +321,10 @@ export class SecurityMappingApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -322,8 +338,8 @@ export class SecurityMappingApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -336,7 +352,7 @@ export class SecurityMappingApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securitymappings/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -354,6 +370,10 @@ export class SecurityMappingApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

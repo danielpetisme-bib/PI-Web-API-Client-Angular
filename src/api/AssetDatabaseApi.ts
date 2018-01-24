@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class AssetDatabaseApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class AssetDatabaseApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIAssetDatabase>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIAssetDatabase>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIAssetDatabase>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIAssetDatabase>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public findAnalyses(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysis>  { 
-			return this.findAnalysesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public findAnalyses(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysis>  { 
+			return this.findAnalysesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public findAnalysesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public findAnalysesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/analyses'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -279,6 +287,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -292,8 +304,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnalysisCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisCategory>  { 
-			return this.getAnalysisCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getAnalysisCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisCategory>  { 
+			return this.getAnalysisCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -306,7 +318,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getAnalysisCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnalysisCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/analysiscategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -321,6 +333,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -334,8 +350,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAnalysisCategory(webId: string, analysisCategory: Models.PIAnalysisCategory, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAnalysisCategoryWithHttpInfo(webId, analysisCategory, extraHttpRequestParams)
+		public createAnalysisCategory(webId: string, analysisCategory: Models.PIAnalysisCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAnalysisCategoryWithHttpInfo(webId, analysisCategory, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -348,7 +364,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createAnalysisCategoryWithHttpInfo(webId: string, analysisCategory: Models.PIAnalysisCategory, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAnalysisCategoryWithHttpInfo(webId: string, analysisCategory: Models.PIAnalysisCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/analysiscategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -361,6 +377,10 @@ export class AssetDatabaseApi {
 
 			if (analysisCategory === null || analysisCategory === undefined) {
 				throw new Error('Required parameter analysisCategory was null or undefined when calling createAnalysisCategory.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -377,8 +397,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnalysisTemplates(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisTemplate>  { 
-			return this.getAnalysisTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams)
+		public getAnalysisTemplates(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisTemplate>  { 
+			return this.getAnalysisTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -391,7 +411,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getAnalysisTemplatesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnalysisTemplatesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/analysistemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -432,6 +452,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('sortOrder', <any>sortOrder);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -445,8 +469,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAnalysisTemplate(webId: string, template: Models.PIAnalysisTemplate, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAnalysisTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+		public createAnalysisTemplate(webId: string, template: Models.PIAnalysisTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAnalysisTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -459,7 +483,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createAnalysisTemplateWithHttpInfo(webId: string, template: Models.PIAnalysisTemplate, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAnalysisTemplateWithHttpInfo(webId: string, template: Models.PIAnalysisTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/analysistemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -472,6 +496,10 @@ export class AssetDatabaseApi {
 
 			if (template === null || template === undefined) {
 				throw new Error('Required parameter template was null or undefined when calling createAnalysisTemplate.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -488,8 +516,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributeCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttributeCategory>  { 
-			return this.getAttributeCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getAttributeCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttributeCategory>  { 
+			return this.getAttributeCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -502,7 +530,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getAttributeCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributeCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/attributecategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -515,6 +543,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -530,8 +562,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAttributeCategory(webId: string, attributeCategory: Models.PIAttributeCategory, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAttributeCategoryWithHttpInfo(webId, attributeCategory, extraHttpRequestParams)
+		public createAttributeCategory(webId: string, attributeCategory: Models.PIAttributeCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAttributeCategoryWithHttpInfo(webId, attributeCategory, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -544,7 +576,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createAttributeCategoryWithHttpInfo(webId: string, attributeCategory: Models.PIAttributeCategory, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAttributeCategoryWithHttpInfo(webId: string, attributeCategory: Models.PIAttributeCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/attributecategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -557,6 +589,10 @@ export class AssetDatabaseApi {
 
 			if (attributeCategory === null || attributeCategory === undefined) {
 				throw new Error('Required parameter attributeCategory was null or undefined when calling createAttributeCategory.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -573,8 +609,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public findElementAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public findElementAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -587,7 +623,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public findElementAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public findElementAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elementattributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -658,6 +694,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -671,8 +711,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getElementCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
-			return this.getElementCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getElementCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
+			return this.getElementCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -685,7 +725,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getElementCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getElementCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elementcategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -700,6 +740,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -713,8 +757,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createElementCategory(webId: string, elementCategory: Models.PIElementCategory, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createElementCategoryWithHttpInfo(webId, elementCategory, extraHttpRequestParams)
+		public createElementCategory(webId: string, elementCategory: Models.PIElementCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createElementCategoryWithHttpInfo(webId, elementCategory, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -727,7 +771,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createElementCategoryWithHttpInfo(webId: string, elementCategory: Models.PIElementCategory, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createElementCategoryWithHttpInfo(webId: string, elementCategory: Models.PIElementCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elementcategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -740,6 +784,10 @@ export class AssetDatabaseApi {
 
 			if (elementCategory === null || elementCategory === undefined) {
 				throw new Error('Required parameter elementCategory was null or undefined when calling createElementCategory.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -756,8 +804,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
-			return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+		public getElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -770,7 +818,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -825,6 +873,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -838,8 +890,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createElement(webId: string, element: Models.PIElement, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createElementWithHttpInfo(webId, element, extraHttpRequestParams)
+		public createElement(webId: string, element: Models.PIElement, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createElementWithHttpInfo(webId, element, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -852,7 +904,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createElementWithHttpInfo(webId: string, element: Models.PIElement, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createElementWithHttpInfo(webId: string, element: Models.PIElement, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -865,6 +917,10 @@ export class AssetDatabaseApi {
 
 			if (element === null || element === undefined) {
 				throw new Error('Required parameter element was null or undefined when calling createElement.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -881,8 +937,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getElementTemplates(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementTemplate>  { 
-			return this.getElementTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams)
+		public getElementTemplates(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementTemplate>  { 
+			return this.getElementTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -895,7 +951,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getElementTemplatesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getElementTemplatesWithHttpInfo(webId: string, field: Array<string>, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elementtemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -936,6 +992,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('sortOrder', <any>sortOrder);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -949,8 +1009,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createElementTemplate(webId: string, template: Models.PIElementTemplate, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createElementTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+		public createElementTemplate(webId: string, template: Models.PIElementTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createElementTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -963,7 +1023,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createElementTemplateWithHttpInfo(webId: string, template: Models.PIElementTemplate, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createElementTemplateWithHttpInfo(webId: string, template: Models.PIElementTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/elementtemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -976,6 +1036,10 @@ export class AssetDatabaseApi {
 
 			if (template === null || template === undefined) {
 				throw new Error('Required parameter template was null or undefined when calling createElementTemplate.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -992,8 +1056,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEnumerationSets(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEnumerationSet>  { 
-			return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getEnumerationSets(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEnumerationSet>  { 
+			return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1006,7 +1070,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getEnumerationSetsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEnumerationSetsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/enumerationsets'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1019,6 +1083,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1034,8 +1102,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createEnumerationSet(webId: string, enumerationSet: Models.PIEnumerationSet, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, extraHttpRequestParams)
+		public createEnumerationSet(webId: string, enumerationSet: Models.PIEnumerationSet, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1048,7 +1116,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createEnumerationSetWithHttpInfo(webId: string, enumerationSet: Models.PIEnumerationSet, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createEnumerationSetWithHttpInfo(webId: string, enumerationSet: Models.PIEnumerationSet, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/enumerationsets'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1061,6 +1129,10 @@ export class AssetDatabaseApi {
 
 			if (enumerationSet === null || enumerationSet === undefined) {
 				throw new Error('Required parameter enumerationSet was null or undefined when calling createEnumerationSet.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1077,8 +1149,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public findEventFrameAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams)
+		public findEventFrameAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1091,7 +1163,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public findEventFrameAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public findEventFrameAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/eventframeattributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1174,6 +1246,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('startTime', <any>startTime);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1187,8 +1263,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
-			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams)
+		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1201,7 +1277,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/eventframes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1282,6 +1358,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1295,8 +1375,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createEventFrame(webId: string, eventFrame: Models.PIEventFrame, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createEventFrameWithHttpInfo(webId, eventFrame, extraHttpRequestParams)
+		public createEventFrame(webId: string, eventFrame: Models.PIEventFrame, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createEventFrameWithHttpInfo(webId, eventFrame, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1309,7 +1389,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createEventFrameWithHttpInfo(webId: string, eventFrame: Models.PIEventFrame, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createEventFrameWithHttpInfo(webId: string, eventFrame: Models.PIEventFrame, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/eventframes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1322,6 +1402,10 @@ export class AssetDatabaseApi {
 
 			if (eventFrame === null || eventFrame === undefined) {
 				throw new Error('Required parameter eventFrame was null or undefined when calling createEventFrame.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1434,8 +1518,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getReferencedElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
-			return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+		public getReferencedElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1448,7 +1532,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getReferencedElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getReferencedElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/referencedelements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1497,6 +1581,10 @@ export class AssetDatabaseApi {
 
 			if ((templateName !== undefined) && (templateName !== null)) {
 				queryParameters.set('templateName', <any>templateName);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1612,8 +1700,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, securityItem, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, securityItem, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1626,7 +1714,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1665,6 +1753,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1678,8 +1770,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, securityItem, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, securityItem, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1692,7 +1784,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1715,6 +1807,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1728,8 +1824,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, securityItem, extraHttpRequestParams)
+		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, securityItem, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1742,7 +1838,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1765,6 +1861,10 @@ export class AssetDatabaseApi {
 				queryParameters.set('securityItem', <any>securityItem);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Post,
 				headers: headers,
@@ -1779,8 +1879,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, securityItem, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, securityItem, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1793,7 +1893,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -1815,6 +1915,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1937,8 +2041,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getTableCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsTableCategory>  { 
-			return this.getTableCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getTableCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsTableCategory>  { 
+			return this.getTableCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1951,7 +2055,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getTableCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getTableCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/tablecategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1964,6 +2068,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1979,8 +2087,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createTableCategory(webId: string, tableCategory: Models.PITableCategory, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createTableCategoryWithHttpInfo(webId, tableCategory, extraHttpRequestParams)
+		public createTableCategory(webId: string, tableCategory: Models.PITableCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createTableCategoryWithHttpInfo(webId, tableCategory, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1993,7 +2101,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createTableCategoryWithHttpInfo(webId: string, tableCategory: Models.PITableCategory, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createTableCategoryWithHttpInfo(webId: string, tableCategory: Models.PITableCategory, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/tablecategories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -2006,6 +2114,10 @@ export class AssetDatabaseApi {
 
 			if (tableCategory === null || tableCategory === undefined) {
 				throw new Error('Required parameter tableCategory was null or undefined when calling createTableCategory.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -2022,8 +2134,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getTables(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsTable>  { 
-			return this.getTablesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getTables(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsTable>  { 
+			return this.getTablesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -2036,7 +2148,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public getTablesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getTablesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/tables'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -2049,6 +2161,10 @@ export class AssetDatabaseApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -2064,8 +2180,8 @@ export class AssetDatabaseApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createTable(webId: string, table: Models.PITable, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createTableWithHttpInfo(webId, table, extraHttpRequestParams)
+		public createTable(webId: string, table: Models.PITable, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createTableWithHttpInfo(webId, table, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -2078,7 +2194,7 @@ export class AssetDatabaseApi {
 				});
 		}
 
-		public createTableWithHttpInfo(webId: string, table: Models.PITable, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createTableWithHttpInfo(webId: string, table: Models.PITable, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/assetdatabases/{webId}/tables'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -2091,6 +2207,10 @@ export class AssetDatabaseApi {
 
 			if (table === null || table === undefined) {
 				throw new Error('Required parameter table was null or undefined when calling createTable.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

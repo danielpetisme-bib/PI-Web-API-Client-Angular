@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class EventFrameApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class EventFrameApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIEventFrame>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIEventFrame>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class EventFrameApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIEventFrame>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIEventFrame>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -258,8 +266,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnnotations(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnnotation>  { 
-			return this.getAnnotationsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getAnnotations(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnnotation>  { 
+			return this.getAnnotationsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -272,7 +280,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getAnnotationsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnnotationsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/annotations'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -285,6 +293,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -300,8 +312,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAnnotation(webId: string, annotation: Models.PIAnnotation, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAnnotationWithHttpInfo(webId, annotation, extraHttpRequestParams)
+		public createAnnotation(webId: string, annotation: Models.PIAnnotation, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAnnotationWithHttpInfo(webId, annotation, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -314,7 +326,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public createAnnotationWithHttpInfo(webId: string, annotation: Models.PIAnnotation, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAnnotationWithHttpInfo(webId: string, annotation: Models.PIAnnotation, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/annotations'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -327,6 +339,10 @@ export class EventFrameApi {
 
 			if (annotation === null || annotation === undefined) {
 				throw new Error('Required parameter annotation was null or undefined when calling createAnnotation.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -343,8 +359,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnnotationById(id: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnnotation>  { 
-			return this.getAnnotationByIdWithHttpInfo(id, webId, selectedFields, extraHttpRequestParams)
+		public getAnnotationById(id: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnnotation>  { 
+			return this.getAnnotationByIdWithHttpInfo(id, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -357,7 +373,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getAnnotationByIdWithHttpInfo(id: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnnotationByIdWithHttpInfo(id: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/annotations/{id}'
 				.replace('{' + 'id' + '}', String(id))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -375,6 +391,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -481,8 +501,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributes(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, extraHttpRequestParams)
+		public getAttributes(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -495,7 +515,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getAttributesWithHttpInfo(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributesWithHttpInfo(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/attributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -554,6 +574,10 @@ export class EventFrameApi {
 				queryParameters.set('valueType', <any>valueType);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -567,8 +591,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAttribute(webId: string, attribute: Models.PIAttribute, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAttributeWithHttpInfo(webId, attribute, extraHttpRequestParams)
+		public createAttribute(webId: string, attribute: Models.PIAttribute, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAttributeWithHttpInfo(webId, attribute, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -581,7 +605,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public createAttributeWithHttpInfo(webId: string, attribute: Models.PIAttribute, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAttributeWithHttpInfo(webId: string, attribute: Models.PIAttribute, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/attributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -594,6 +618,10 @@ export class EventFrameApi {
 
 			if (attribute === null || attribute === undefined) {
 				throw new Error('Required parameter attribute was null or undefined when calling createAttribute.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -648,8 +676,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
-			return this.getCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
+			return this.getCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -662,7 +690,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/categories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -675,6 +703,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -732,8 +764,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public findEventFrameAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams)
+		public findEventFrameAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -746,7 +778,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public findEventFrameAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public findEventFrameAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, endTime?: string, eventFrameCategory?: string, eventFrameDescriptionFilter?: string, eventFrameNameFilter?: string, eventFrameTemplate?: string, maxCount?: number, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/eventframeattributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -829,6 +861,10 @@ export class EventFrameApi {
 				queryParameters.set('startTime', <any>startTime);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -842,8 +878,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
-			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams)
+		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -856,7 +892,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, referencedElementTemplateName?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/eventframes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -937,6 +973,10 @@ export class EventFrameApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -950,8 +990,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createEventFrame(webId: string, eventFrame: Models.PIEventFrame, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createEventFrameWithHttpInfo(webId, eventFrame, extraHttpRequestParams)
+		public createEventFrame(webId: string, eventFrame: Models.PIEventFrame, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createEventFrameWithHttpInfo(webId, eventFrame, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -964,7 +1004,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public createEventFrameWithHttpInfo(webId: string, eventFrame: Models.PIEventFrame, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createEventFrameWithHttpInfo(webId: string, eventFrame: Models.PIEventFrame, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/eventframes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -977,6 +1017,10 @@ export class EventFrameApi {
 
 			if (eventFrame === null || eventFrame === undefined) {
 				throw new Error('Required parameter eventFrame was null or undefined when calling createEventFrame.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -993,8 +1037,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getReferencedElements(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
-			return this.getReferencedElementsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getReferencedElements(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getReferencedElementsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1007,7 +1051,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getReferencedElementsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getReferencedElementsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/referencedelements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1020,6 +1064,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1035,8 +1083,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1049,7 +1097,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1078,6 +1126,10 @@ export class EventFrameApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1091,8 +1143,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1105,7 +1157,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1124,6 +1176,10 @@ export class EventFrameApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1137,8 +1193,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, extraHttpRequestParams)
+		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1151,7 +1207,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1170,6 +1226,10 @@ export class EventFrameApi {
 				queryParameters.set('applyToChildren', <any>applyToChildren);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Post,
 				headers: headers,
@@ -1184,8 +1244,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1198,7 +1258,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -1216,6 +1276,10 @@ export class EventFrameApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1330,8 +1394,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemEventFrame>  { 
-			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams)
+		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemEventFrame>  { 
+			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1344,7 +1408,7 @@ export class EventFrameApi {
 				});
 		}
 
-		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/multiple';
 
 			let queryParameters = new URLSearchParams();
@@ -1374,6 +1438,10 @@ export class EventFrameApi {
 				}
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1387,8 +1455,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSearchByAttribute(search: Models.PISearchByAttributeEventFrame, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSearchByAttributeWithHttpInfo(search, extraHttpRequestParams)
+		public getEventFramesQuery(databaseWebId?: string, maxCount?: number, query?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.getEventFramesQueryWithHttpInfo(databaseWebId, maxCount, query, selectedFields, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1401,20 +1469,39 @@ export class EventFrameApi {
 				});
 		}
 
-		public createSearchByAttributeWithHttpInfo(search: Models.PISearchByAttributeEventFrame, extraHttpRequestParams?: any) : Observable<Response>  { 
-			const localVarPath = this.basePath + '/eventframes/searchbyattribute';
+		public getEventFramesQueryWithHttpInfo(databaseWebId?: string, maxCount?: number, query?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+			const localVarPath = this.basePath + '/eventframes/search';
 
 			let queryParameters = new URLSearchParams();
 			let headers = new Headers(this.defaultHeaders.toJSON());
 
-			if (search === null || search === undefined) {
-				throw new Error('Required parameter search was null or undefined when calling createSearchByAttribute.');
+			if ((databaseWebId !== undefined) && (databaseWebId !== null)) {
+				queryParameters.set('databaseWebId', <any>databaseWebId);
+			}
+
+			if ((maxCount !== undefined) && (maxCount !== null)) {
+				queryParameters.set('maxCount', <any>maxCount);
+			}
+
+			if ((query !== undefined) && (query !== null)) {
+				queryParameters.set('query', <any>query);
+			}
+
+			if ((selectedFields !== undefined) && (selectedFields !== null)) {
+				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((startIndex !== undefined) && (startIndex !== null)) {
+				queryParameters.set('startIndex', <any>startIndex);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
-				method: RequestMethod.Post,
+				method: RequestMethod.Get,
 				headers: headers,
-				body: JSON.stringify(search),
 				search: queryParameters,
 				withCredentials: this.withCredentials,
 			});
@@ -1425,8 +1512,8 @@ export class EventFrameApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public executeSearchByAttribute(searchId: string, canBeAcknowledged?: boolean, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.executeSearchByAttributeWithHttpInfo(searchId, canBeAcknowledged, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams)
+		public createSearchByAttribute(query: Models.PISearchByAttribute, noResults?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.createSearchByAttributeWithHttpInfo(query, noResults, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1439,7 +1526,57 @@ export class EventFrameApi {
 				});
 		}
 
-		public executeSearchByAttributeWithHttpInfo(searchId: string, canBeAcknowledged?: boolean, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSearchByAttributeWithHttpInfo(query: Models.PISearchByAttribute, noResults?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+			const localVarPath = this.basePath + '/eventframes/searchbyattribute';
+
+			let queryParameters = new URLSearchParams();
+			let headers = new Headers(this.defaultHeaders.toJSON());
+
+			if (query === null || query === undefined) {
+				throw new Error('Required parameter query was null or undefined when calling createSearchByAttribute.');
+			}
+
+			if ((noResults !== undefined) && (noResults !== null)) {
+				queryParameters.set('noResults', <any>noResults);
+			}
+
+			if ((selectedFields !== undefined) && (selectedFields !== null)) {
+				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
+			let requestOptions: RequestOptionsArgs = new RequestOptions({
+				method: RequestMethod.Post,
+				headers: headers,
+				body: JSON.stringify(query),
+				search: queryParameters,
+				withCredentials: this.withCredentials,
+			});
+
+			if (extraHttpRequestParams) {
+				requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+			}
+			return this.http.request(localVarPath, requestOptions);
+		}
+
+		public executeSearchByAttribute(searchId: string, canBeAcknowledged?: boolean, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.executeSearchByAttributeWithHttpInfo(searchId, canBeAcknowledged, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams)
+				.map((response: Response) => {
+					try
+					{
+						return response.json()
+					}
+					catch(e)
+					{
+						return {};
+					}
+				});
+		}
+
+		public executeSearchByAttributeWithHttpInfo(searchId: string, canBeAcknowledged?: boolean, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, referencedElementNameFilter?: string, searchFullHierarchy?: boolean, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/eventframes/searchbyattribute/{searchId}'
 				.replace('{' + 'searchId' + '}', String(searchId));
 
@@ -1506,6 +1643,10 @@ export class EventFrameApi {
 
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

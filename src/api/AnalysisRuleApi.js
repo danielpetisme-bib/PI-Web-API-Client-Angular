@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var AnalysisRuleApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var AnalysisRuleApi = (function () {
         }
         return objA;
     };
-    AnalysisRuleApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    AnalysisRuleApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var AnalysisRuleApi = (function () {
             }
         });
     };
-    AnalysisRuleApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    AnalysisRuleApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/analysisrules';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -69,6 +69,9 @@ var AnalysisRuleApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -80,8 +83,8 @@ var AnalysisRuleApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AnalysisRuleApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AnalysisRuleApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -91,7 +94,7 @@ var AnalysisRuleApi = (function () {
             }
         });
     };
-    AnalysisRuleApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AnalysisRuleApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/analysisrules/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -101,6 +104,9 @@ var AnalysisRuleApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -177,8 +183,8 @@ var AnalysisRuleApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AnalysisRuleApi.prototype.getAnalysisRules = function (webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
-        return this.getAnalysisRulesWithHttpInfo(webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+    AnalysisRuleApi.prototype.getAnalysisRules = function (webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
+        return this.getAnalysisRulesWithHttpInfo(webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +194,7 @@ var AnalysisRuleApi = (function () {
             }
         });
     };
-    AnalysisRuleApi.prototype.getAnalysisRulesWithHttpInfo = function (webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
+    AnalysisRuleApi.prototype.getAnalysisRulesWithHttpInfo = function (webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/analysisrules/{webId}/analysisrules'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -217,6 +223,9 @@ var AnalysisRuleApi = (function () {
         if ((startIndex !== undefined) && (startIndex !== null)) {
             queryParameters.set('startIndex', startIndex);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -228,8 +237,8 @@ var AnalysisRuleApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AnalysisRuleApi.prototype.createAnalysisRule = function (webId, analysisRule, extraHttpRequestParams) {
-        return this.createAnalysisRuleWithHttpInfo(webId, analysisRule, extraHttpRequestParams)
+    AnalysisRuleApi.prototype.createAnalysisRule = function (webId, analysisRule, webIdType, extraHttpRequestParams) {
+        return this.createAnalysisRuleWithHttpInfo(webId, analysisRule, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -239,7 +248,7 @@ var AnalysisRuleApi = (function () {
             }
         });
     };
-    AnalysisRuleApi.prototype.createAnalysisRuleWithHttpInfo = function (webId, analysisRule, extraHttpRequestParams) {
+    AnalysisRuleApi.prototype.createAnalysisRuleWithHttpInfo = function (webId, analysisRule, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/analysisrules/{webId}/analysisrules'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -249,6 +258,9 @@ var AnalysisRuleApi = (function () {
         }
         if (analysisRule === null || analysisRule === undefined) {
             throw new Error('Required parameter analysisRule was null or undefined when calling createAnalysisRule.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,

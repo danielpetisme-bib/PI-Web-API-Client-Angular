@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -27,8 +27,9 @@ export class PIPoint {
 	public EngineeringUnits?: string;
 	public Step?: boolean;
 	public Future?: boolean;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, id?: number, name?: string, path?: string, descriptor?: string, pointClass?: string, pointType?: string, digitalSetName?: string, engineeringUnits?: string, step?: boolean, future?: boolean, links?: { [key: string]: string; })
+	public Links?: Models.PIPointLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: number, name?: string, path?: string, descriptor?: string, pointClass?: string, pointType?: string, digitalSetName?: string, engineeringUnits?: string, step?: boolean, future?: boolean, links?: Models.PIPointLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -77,6 +78,10 @@ export class PIPoint {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class ConfigurationApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -151,49 +151,6 @@ export class ConfigurationApi {
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Delete,
 				headers: headers,
-				search: queryParameters,
-				withCredentials: this.withCredentials,
-			});
-
-			if (extraHttpRequestParams) {
-				requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-			}
-			return this.http.request(localVarPath, requestOptions);
-		}
-
-		public put(key: string, value: any, extraHttpRequestParams?: any) : Observable<{}>  { 
-			return this.putWithHttpInfo(key, value, extraHttpRequestParams)
-				.map((response: Response) => {
-					try
-					{
-						return response.json()
-					}
-					catch(e)
-					{
-						return {};
-					}
-				});
-		}
-
-		public putWithHttpInfo(key: string, value: any, extraHttpRequestParams?: any) : Observable<Response>  { 
-			const localVarPath = this.basePath + '/system/configuration/{key}'
-				.replace('{' + 'key' + '}', String(key));
-
-			let queryParameters = new URLSearchParams();
-			let headers = new Headers(this.defaultHeaders.toJSON());
-
-			if (key === null || key === undefined) {
-				throw new Error('Required parameter key was null or undefined when calling put.');
-			}
-
-			if (value === null || value === undefined) {
-				throw new Error('Required parameter value was null or undefined when calling put.');
-			}
-
-			let requestOptions: RequestOptionsArgs = new RequestOptions({
-				method: RequestMethod.Put,
-				headers: headers,
-				body: JSON.stringify(value),
 				search: queryParameters,
 				withCredentials: this.withCredentials,
 			});

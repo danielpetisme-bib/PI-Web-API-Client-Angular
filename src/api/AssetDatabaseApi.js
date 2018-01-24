@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var AssetDatabaseApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var AssetDatabaseApi = (function () {
         }
         return objA;
     };
-    AssetDatabaseApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -69,6 +69,9 @@ var AssetDatabaseApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -80,8 +83,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -91,7 +94,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -101,6 +104,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -177,8 +183,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.findAnalyses = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
-        return this.findAnalysesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.findAnalyses = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
+        return this.findAnalysesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +194,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.findAnalysesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.findAnalysesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/analyses'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -223,6 +229,9 @@ var AssetDatabaseApi = (function () {
         if ((startIndex !== undefined) && (startIndex !== null)) {
             queryParameters.set('startIndex', startIndex);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -234,8 +243,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getAnalysisCategories = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getAnalysisCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getAnalysisCategories = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getAnalysisCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -245,7 +254,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getAnalysisCategoriesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getAnalysisCategoriesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/analysiscategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -256,6 +265,9 @@ var AssetDatabaseApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -267,8 +279,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createAnalysisCategory = function (webId, analysisCategory, extraHttpRequestParams) {
-        return this.createAnalysisCategoryWithHttpInfo(webId, analysisCategory, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createAnalysisCategory = function (webId, analysisCategory, webIdType, extraHttpRequestParams) {
+        return this.createAnalysisCategoryWithHttpInfo(webId, analysisCategory, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -278,7 +290,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createAnalysisCategoryWithHttpInfo = function (webId, analysisCategory, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createAnalysisCategoryWithHttpInfo = function (webId, analysisCategory, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/analysiscategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -288,6 +300,9 @@ var AssetDatabaseApi = (function () {
         }
         if (analysisCategory === null || analysisCategory === undefined) {
             throw new Error('Required parameter analysisCategory was null or undefined when calling createAnalysisCategory.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -301,8 +316,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getAnalysisTemplates = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams) {
-        return this.getAnalysisTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getAnalysisTemplates = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
+        return this.getAnalysisTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -312,7 +327,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getAnalysisTemplatesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getAnalysisTemplatesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/analysistemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -344,6 +359,9 @@ var AssetDatabaseApi = (function () {
         if ((sortOrder !== undefined) && (sortOrder !== null)) {
             queryParameters.set('sortOrder', sortOrder);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -355,8 +373,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createAnalysisTemplate = function (webId, template, extraHttpRequestParams) {
-        return this.createAnalysisTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createAnalysisTemplate = function (webId, template, webIdType, extraHttpRequestParams) {
+        return this.createAnalysisTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -366,7 +384,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createAnalysisTemplateWithHttpInfo = function (webId, template, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createAnalysisTemplateWithHttpInfo = function (webId, template, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/analysistemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -376,6 +394,9 @@ var AssetDatabaseApi = (function () {
         }
         if (template === null || template === undefined) {
             throw new Error('Required parameter template was null or undefined when calling createAnalysisTemplate.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -389,8 +410,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getAttributeCategories = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getAttributeCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getAttributeCategories = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getAttributeCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -400,7 +421,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getAttributeCategoriesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getAttributeCategoriesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/attributecategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -410,6 +431,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -422,8 +446,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createAttributeCategory = function (webId, attributeCategory, extraHttpRequestParams) {
-        return this.createAttributeCategoryWithHttpInfo(webId, attributeCategory, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createAttributeCategory = function (webId, attributeCategory, webIdType, extraHttpRequestParams) {
+        return this.createAttributeCategoryWithHttpInfo(webId, attributeCategory, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -433,7 +457,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createAttributeCategoryWithHttpInfo = function (webId, attributeCategory, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createAttributeCategoryWithHttpInfo = function (webId, attributeCategory, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/attributecategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -443,6 +467,9 @@ var AssetDatabaseApi = (function () {
         }
         if (attributeCategory === null || attributeCategory === undefined) {
             throw new Error('Required parameter attributeCategory was null or undefined when calling createAttributeCategory.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -456,8 +483,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.findElementAttributes = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
-        return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.findElementAttributes = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
+        return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -467,7 +494,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.findElementAttributesWithHttpInfo = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.findElementAttributesWithHttpInfo = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elementattributes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -520,6 +547,9 @@ var AssetDatabaseApi = (function () {
         if ((startIndex !== undefined) && (startIndex !== null)) {
             queryParameters.set('startIndex', startIndex);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -531,8 +561,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getElementCategories = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getElementCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getElementCategories = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getElementCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -542,7 +572,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getElementCategoriesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getElementCategoriesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elementcategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -553,6 +583,9 @@ var AssetDatabaseApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -564,8 +597,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createElementCategory = function (webId, elementCategory, extraHttpRequestParams) {
-        return this.createElementCategoryWithHttpInfo(webId, elementCategory, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createElementCategory = function (webId, elementCategory, webIdType, extraHttpRequestParams) {
+        return this.createElementCategoryWithHttpInfo(webId, elementCategory, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -575,7 +608,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createElementCategoryWithHttpInfo = function (webId, elementCategory, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createElementCategoryWithHttpInfo = function (webId, elementCategory, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elementcategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -585,6 +618,9 @@ var AssetDatabaseApi = (function () {
         }
         if (elementCategory === null || elementCategory === undefined) {
             throw new Error('Required parameter elementCategory was null or undefined when calling createElementCategory.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -598,8 +634,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getElements = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams) {
-        return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getElements = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams) {
+        return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -609,7 +645,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getElementsWithHttpInfo = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getElementsWithHttpInfo = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elements'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -650,6 +686,9 @@ var AssetDatabaseApi = (function () {
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -661,8 +700,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createElement = function (webId, element, extraHttpRequestParams) {
-        return this.createElementWithHttpInfo(webId, element, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createElement = function (webId, element, webIdType, extraHttpRequestParams) {
+        return this.createElementWithHttpInfo(webId, element, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -672,7 +711,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createElementWithHttpInfo = function (webId, element, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createElementWithHttpInfo = function (webId, element, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elements'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -682,6 +721,9 @@ var AssetDatabaseApi = (function () {
         }
         if (element === null || element === undefined) {
             throw new Error('Required parameter element was null or undefined when calling createElement.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -695,8 +737,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getElementTemplates = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams) {
-        return this.getElementTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getElementTemplates = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
+        return this.getElementTemplatesWithHttpInfo(webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -706,7 +748,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getElementTemplatesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getElementTemplatesWithHttpInfo = function (webId, field, maxCount, query, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elementtemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -738,6 +780,9 @@ var AssetDatabaseApi = (function () {
         if ((sortOrder !== undefined) && (sortOrder !== null)) {
             queryParameters.set('sortOrder', sortOrder);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -749,8 +794,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createElementTemplate = function (webId, template, extraHttpRequestParams) {
-        return this.createElementTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createElementTemplate = function (webId, template, webIdType, extraHttpRequestParams) {
+        return this.createElementTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -760,7 +805,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createElementTemplateWithHttpInfo = function (webId, template, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createElementTemplateWithHttpInfo = function (webId, template, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/elementtemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -770,6 +815,9 @@ var AssetDatabaseApi = (function () {
         }
         if (template === null || template === undefined) {
             throw new Error('Required parameter template was null or undefined when calling createElementTemplate.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -783,8 +831,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getEnumerationSets = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getEnumerationSets = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -794,7 +842,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getEnumerationSetsWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getEnumerationSetsWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/enumerationsets'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -804,6 +852,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -816,8 +867,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createEnumerationSet = function (webId, enumerationSet, extraHttpRequestParams) {
-        return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createEnumerationSet = function (webId, enumerationSet, webIdType, extraHttpRequestParams) {
+        return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -827,7 +878,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createEnumerationSetWithHttpInfo = function (webId, enumerationSet, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createEnumerationSetWithHttpInfo = function (webId, enumerationSet, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/enumerationsets'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -837,6 +888,9 @@ var AssetDatabaseApi = (function () {
         }
         if (enumerationSet === null || enumerationSet === undefined) {
             throw new Error('Required parameter enumerationSet was null or undefined when calling createEnumerationSet.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -850,8 +904,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.findEventFrameAttributes = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams) {
-        return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.findEventFrameAttributes = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams) {
+        return this.findEventFrameAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -861,7 +915,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.findEventFrameAttributesWithHttpInfo = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.findEventFrameAttributesWithHttpInfo = function (webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, endTime, eventFrameCategory, eventFrameDescriptionFilter, eventFrameNameFilter, eventFrameTemplate, maxCount, referencedElementNameFilter, searchFullHierarchy, searchMode, selectedFields, sortField, sortOrder, startIndex, startTime, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/eventframeattributes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -923,6 +977,9 @@ var AssetDatabaseApi = (function () {
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -934,8 +991,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getEventFrames = function (webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams) {
-        return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getEventFrames = function (webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams) {
+        return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -945,7 +1002,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getEventFramesWithHttpInfo = function (webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getEventFramesWithHttpInfo = function (webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, referencedElementNameFilter, referencedElementTemplateName, searchFullHierarchy, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/eventframes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1007,6 +1064,9 @@ var AssetDatabaseApi = (function () {
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1018,8 +1078,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createEventFrame = function (webId, eventFrame, extraHttpRequestParams) {
-        return this.createEventFrameWithHttpInfo(webId, eventFrame, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createEventFrame = function (webId, eventFrame, webIdType, extraHttpRequestParams) {
+        return this.createEventFrameWithHttpInfo(webId, eventFrame, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1029,7 +1089,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createEventFrameWithHttpInfo = function (webId, eventFrame, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createEventFrameWithHttpInfo = function (webId, eventFrame, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/eventframes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1039,6 +1099,9 @@ var AssetDatabaseApi = (function () {
         }
         if (eventFrame === null || eventFrame === undefined) {
             throw new Error('Required parameter eventFrame was null or undefined when calling createEventFrame.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -1130,8 +1193,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getReferencedElements = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams) {
-        return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getReferencedElements = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams) {
+        return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1141,7 +1204,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getReferencedElementsWithHttpInfo = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getReferencedElementsWithHttpInfo = function (webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/referencedelements'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1178,6 +1241,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1271,8 +1337,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getSecurity = function (webId, securityItem, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams) {
-        return this.getSecurityWithHttpInfo(webId, securityItem, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getSecurity = function (webId, securityItem, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getSecurityWithHttpInfo(webId, securityItem, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1282,7 +1348,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getSecurityWithHttpInfo = function (webId, securityItem, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getSecurityWithHttpInfo = function (webId, securityItem, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/security'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1314,6 +1380,9 @@ var AssetDatabaseApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1325,8 +1394,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getSecurityEntries = function (webId, nameFilter, securityItem, selectedFields, extraHttpRequestParams) {
-        return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, securityItem, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getSecurityEntries = function (webId, nameFilter, securityItem, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, securityItem, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1336,7 +1405,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getSecurityEntriesWithHttpInfo = function (webId, nameFilter, securityItem, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getSecurityEntriesWithHttpInfo = function (webId, nameFilter, securityItem, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1353,6 +1422,9 @@ var AssetDatabaseApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1364,8 +1436,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createSecurityEntry = function (webId, securityEntry, applyToChildren, securityItem, extraHttpRequestParams) {
-        return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, securityItem, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createSecurityEntry = function (webId, securityEntry, applyToChildren, securityItem, webIdType, extraHttpRequestParams) {
+        return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, securityItem, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1375,7 +1447,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createSecurityEntryWithHttpInfo = function (webId, securityEntry, applyToChildren, securityItem, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createSecurityEntryWithHttpInfo = function (webId, securityEntry, applyToChildren, securityItem, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1392,6 +1464,9 @@ var AssetDatabaseApi = (function () {
         if ((securityItem !== undefined) && (securityItem !== null)) {
             queryParameters.set('securityItem', securityItem);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
             headers: headers,
@@ -1404,8 +1479,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getSecurityEntryByName = function (name, webId, securityItem, selectedFields, extraHttpRequestParams) {
-        return this.getSecurityEntryByNameWithHttpInfo(name, webId, securityItem, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getSecurityEntryByName = function (name, webId, securityItem, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getSecurityEntryByNameWithHttpInfo(name, webId, securityItem, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1415,7 +1490,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getSecurityEntryByNameWithHttpInfo = function (name, webId, securityItem, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getSecurityEntryByNameWithHttpInfo = function (name, webId, securityItem, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/securityentries/{name}'
             .replace('{' + 'name' + '}', String(name))
             .replace('{' + 'webId' + '}', String(webId));
@@ -1432,6 +1507,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1528,8 +1606,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getTableCategories = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getTableCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getTableCategories = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getTableCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1539,7 +1617,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getTableCategoriesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getTableCategoriesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/tablecategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1549,6 +1627,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1561,8 +1642,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createTableCategory = function (webId, tableCategory, extraHttpRequestParams) {
-        return this.createTableCategoryWithHttpInfo(webId, tableCategory, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createTableCategory = function (webId, tableCategory, webIdType, extraHttpRequestParams) {
+        return this.createTableCategoryWithHttpInfo(webId, tableCategory, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1572,7 +1653,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createTableCategoryWithHttpInfo = function (webId, tableCategory, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createTableCategoryWithHttpInfo = function (webId, tableCategory, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/tablecategories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1582,6 +1663,9 @@ var AssetDatabaseApi = (function () {
         }
         if (tableCategory === null || tableCategory === undefined) {
             throw new Error('Required parameter tableCategory was null or undefined when calling createTableCategory.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -1595,8 +1679,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.getTables = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getTablesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.getTables = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getTablesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1606,7 +1690,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.getTablesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.getTablesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/tables'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1616,6 +1700,9 @@ var AssetDatabaseApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1628,8 +1715,8 @@ var AssetDatabaseApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AssetDatabaseApi.prototype.createTable = function (webId, table, extraHttpRequestParams) {
-        return this.createTableWithHttpInfo(webId, table, extraHttpRequestParams)
+    AssetDatabaseApi.prototype.createTable = function (webId, table, webIdType, extraHttpRequestParams) {
+        return this.createTableWithHttpInfo(webId, table, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1639,7 +1726,7 @@ var AssetDatabaseApi = (function () {
             }
         });
     };
-    AssetDatabaseApi.prototype.createTableWithHttpInfo = function (webId, table, extraHttpRequestParams) {
+    AssetDatabaseApi.prototype.createTableWithHttpInfo = function (webId, table, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/assetdatabases/{webId}/tables'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -1649,6 +1736,9 @@ var AssetDatabaseApi = (function () {
         }
         if (table === null || table === undefined) {
             throw new Error('Required parameter table was null or undefined when calling createTable.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,

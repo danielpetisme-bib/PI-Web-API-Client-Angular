@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -37,8 +37,9 @@ export class PIEventFrame {
 	public AreValuesCaptured?: boolean;
 	public RefElementWebIds?: Array<string>;
 	public Security?: Models.PISecurity;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, templateName?: string, hasChildren?: boolean, categoryNames?: Array<string>, extendedProperties?: { [key: string]: Models.PIValue; }, startTime?: string, endTime?: string, severity?: string, acknowledgedBy?: string, acknowledgedDate?: string, canBeAcknowledged?: boolean, isAcknowledged?: boolean, isAnnotated?: boolean, isLocked?: boolean, areValuesCaptured?: boolean, refElementWebIds?: Array<string>, security?: Models.PISecurity, links?: { [key: string]: string; })
+	public Links?: Models.PIEventFrameLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, templateName?: string, hasChildren?: boolean, categoryNames?: Array<string>, extendedProperties?: { [key: string]: Models.PIValue; }, startTime?: string, endTime?: string, severity?: string, acknowledgedBy?: string, acknowledgedDate?: string, canBeAcknowledged?: boolean, isAcknowledged?: boolean, isAnnotated?: boolean, isLocked?: boolean, areValuesCaptured?: boolean, refElementWebIds?: Array<string>, security?: Models.PISecurity, links?: Models.PIEventFrameLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -127,6 +128,10 @@ export class PIEventFrame {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

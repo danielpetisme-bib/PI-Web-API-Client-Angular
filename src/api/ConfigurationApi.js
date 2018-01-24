@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var ConfigurationApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -123,40 +123,6 @@ var ConfigurationApi = (function () {
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Delete,
             headers: headers,
-            search: queryParameters,
-            withCredentials: this.withCredentials
-        });
-        if (extraHttpRequestParams) {
-            requestOptions = Object.assign(requestOptions, extraHttpRequestParams);
-        }
-        return this.http.request(localVarPath, requestOptions);
-    };
-    ConfigurationApi.prototype.put = function (key, value, extraHttpRequestParams) {
-        return this.putWithHttpInfo(key, value, extraHttpRequestParams)
-            .map(function (response) {
-            try {
-                return response.json();
-            }
-            catch (e) {
-                return {};
-            }
-        });
-    };
-    ConfigurationApi.prototype.putWithHttpInfo = function (key, value, extraHttpRequestParams) {
-        var localVarPath = this.basePath + '/system/configuration/{key}'
-            .replace('{' + 'key' + '}', String(key));
-        var queryParameters = new http_1.URLSearchParams();
-        var headers = new http_1.Headers(this.defaultHeaders.toJSON());
-        if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling put.');
-        }
-        if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling put.');
-        }
-        var requestOptions = new http_2.RequestOptions({
-            method: http_2.RequestMethod.Put,
-            headers: headers,
-            body: JSON.stringify(value),
             search: queryParameters,
             withCredentials: this.withCredentials
         });

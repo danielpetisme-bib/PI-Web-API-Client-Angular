@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var AttributeTemplateApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var AttributeTemplateApi = (function () {
         }
         return objA;
     };
-    AttributeTemplateApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    AttributeTemplateApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var AttributeTemplateApi = (function () {
             }
         });
     };
-    AttributeTemplateApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    AttributeTemplateApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/attributetemplates';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -69,6 +69,9 @@ var AttributeTemplateApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -80,8 +83,8 @@ var AttributeTemplateApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AttributeTemplateApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AttributeTemplateApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -91,7 +94,7 @@ var AttributeTemplateApi = (function () {
             }
         });
     };
-    AttributeTemplateApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AttributeTemplateApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/attributetemplates/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -101,6 +104,9 @@ var AttributeTemplateApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -177,8 +183,8 @@ var AttributeTemplateApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AttributeTemplateApi.prototype.getAttributeTemplates = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getAttributeTemplatesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AttributeTemplateApi.prototype.getAttributeTemplates = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getAttributeTemplatesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +194,7 @@ var AttributeTemplateApi = (function () {
             }
         });
     };
-    AttributeTemplateApi.prototype.getAttributeTemplatesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AttributeTemplateApi.prototype.getAttributeTemplatesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/attributetemplates/{webId}/attributetemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -198,6 +204,9 @@ var AttributeTemplateApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -210,8 +219,8 @@ var AttributeTemplateApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AttributeTemplateApi.prototype.createAttributeTemplate = function (webId, template, extraHttpRequestParams) {
-        return this.createAttributeTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+    AttributeTemplateApi.prototype.createAttributeTemplate = function (webId, template, webIdType, extraHttpRequestParams) {
+        return this.createAttributeTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -221,7 +230,7 @@ var AttributeTemplateApi = (function () {
             }
         });
     };
-    AttributeTemplateApi.prototype.createAttributeTemplateWithHttpInfo = function (webId, template, extraHttpRequestParams) {
+    AttributeTemplateApi.prototype.createAttributeTemplateWithHttpInfo = function (webId, template, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/attributetemplates/{webId}/attributetemplates'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -231,6 +240,9 @@ var AttributeTemplateApi = (function () {
         }
         if (template === null || template === undefined) {
             throw new Error('Required parameter template was null or undefined when calling createAttributeTemplate.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -244,8 +256,8 @@ var AttributeTemplateApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    AttributeTemplateApi.prototype.getCategories = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    AttributeTemplateApi.prototype.getCategories = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -255,7 +267,7 @@ var AttributeTemplateApi = (function () {
             }
         });
     };
-    AttributeTemplateApi.prototype.getCategoriesWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    AttributeTemplateApi.prototype.getCategoriesWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/attributetemplates/{webId}/categories'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -265,6 +277,9 @@ var AttributeTemplateApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,

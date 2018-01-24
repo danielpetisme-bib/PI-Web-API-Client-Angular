@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var StreamApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var StreamApi = (function () {
         }
         return objA;
     };
-    StreamApi.prototype.getChannel = function (webId, includeInitialValues, extraHttpRequestParams) {
-        return this.getChannelWithHttpInfo(webId, includeInitialValues, extraHttpRequestParams)
+    StreamApi.prototype.getChannel = function (webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams) {
+        return this.getChannelWithHttpInfo(webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var StreamApi = (function () {
             }
         });
     };
-    StreamApi.prototype.getChannelWithHttpInfo = function (webId, includeInitialValues, extraHttpRequestParams) {
+    StreamApi.prototype.getChannelWithHttpInfo = function (webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streams/{webId}/channel'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -64,8 +64,14 @@ var StreamApi = (function () {
         if (webId === null || webId === undefined) {
             throw new Error('Required parameter webId was null or undefined when calling getChannel.');
         }
+        if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+            queryParameters.set('heartbeatRate', heartbeatRate);
+        }
         if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
             queryParameters.set('includeInitialValues', includeInitialValues);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -114,8 +120,8 @@ var StreamApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamApi.prototype.getInterpolated = function (webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams) {
-        return this.getInterpolatedWithHttpInfo(webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams)
+    StreamApi.prototype.getInterpolated = function (webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, syncTime, syncTimeBoundaryType, timeZone, extraHttpRequestParams) {
+        return this.getInterpolatedWithHttpInfo(webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, syncTime, syncTimeBoundaryType, timeZone, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -125,7 +131,7 @@ var StreamApi = (function () {
             }
         });
     };
-    StreamApi.prototype.getInterpolatedWithHttpInfo = function (webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams) {
+    StreamApi.prototype.getInterpolatedWithHttpInfo = function (webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, syncTime, syncTimeBoundaryType, timeZone, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streams/{webId}/interpolated'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -153,6 +159,12 @@ var StreamApi = (function () {
         }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
+        }
+        if ((syncTime !== undefined) && (syncTime !== null)) {
+            queryParameters.set('syncTime', syncTime);
+        }
+        if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+            queryParameters.set('syncTimeBoundaryType', syncTimeBoundaryType);
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
@@ -574,8 +586,8 @@ var StreamApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamApi.prototype.updateValue = function (webId, value, bufferOption, updateOption, extraHttpRequestParams) {
-        return this.updateValueWithHttpInfo(webId, value, bufferOption, updateOption, extraHttpRequestParams)
+    StreamApi.prototype.updateValue = function (webId, value, bufferOption, updateOption, webIdType, extraHttpRequestParams) {
+        return this.updateValueWithHttpInfo(webId, value, bufferOption, updateOption, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -585,7 +597,7 @@ var StreamApi = (function () {
             }
         });
     };
-    StreamApi.prototype.updateValueWithHttpInfo = function (webId, value, bufferOption, updateOption, extraHttpRequestParams) {
+    StreamApi.prototype.updateValueWithHttpInfo = function (webId, value, bufferOption, updateOption, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streams/{webId}/value'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -601,6 +613,9 @@ var StreamApi = (function () {
         }
         if ((updateOption !== undefined) && (updateOption !== null)) {
             queryParameters.set('updateOption', updateOption);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,

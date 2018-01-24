@@ -26,7 +26,7 @@ Method | HTTP request | Description
 
 
 # **list**
-> list(selectedFields?: string, extraHttpRequestParams?: any)
+> list(selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve a list of all Asset Servers known to this service.
 
@@ -35,6 +35,7 @@ Retrieve a list of all Asset Servers known to this service.
 Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -44,7 +45,7 @@ Observable<Models.PIItemsAssetServer>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getByName**
-> getByName(name: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getByName(name: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve an Asset Server by name.
 
@@ -54,6 +55,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| The name of the server.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -63,7 +65,7 @@ Observable<Models.PIAssetServer>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getByPath**
-> getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve an Asset Server by path.
 
@@ -73,6 +75,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **string**| The path to the server.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -82,7 +85,7 @@ Observable<Models.PIAssetServer>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **get**
-> get(webId: string, selectedFields?: string, extraHttpRequestParams?: any)
+> get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve an Asset Server.
 
@@ -92,6 +95,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the server.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -101,7 +105,7 @@ Observable<Models.PIAssetServer>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getAnalysisRulePlugIns**
-> getAnalysisRulePlugIns(webId: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getAnalysisRulePlugIns(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve a list of all Analysis Rule Plug-in's.
 
@@ -111,6 +115,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the asset server, where the Analysis Rule Plug-in's are installed.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -120,7 +125,7 @@ Observable<Models.PIItemsAnalysisRulePlugIn>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getDatabases**
-> getDatabases(webId: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getDatabases(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve a list of all Asset Databases on the specified Asset Server.
 
@@ -130,6 +135,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the server.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -139,7 +145,7 @@ Observable<Models.PIItemsAssetDatabase>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **createAssetDatabase**
-> createAssetDatabase(webId: string, database: Models.PIAssetDatabase, extraHttpRequestParams?: any)
+> createAssetDatabase(webId: string, database: Models.PIAssetDatabase, webIdType?: string, extraHttpRequestParams?: any)
 
 Create an asset database.
 
@@ -149,6 +155,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the asset server on which to create the database.. | [required]
  **database** | **Models.PIAssetDatabase**| The new database definition.. | [required]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -158,7 +165,7 @@ Observable<{}>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurity**
-> getSecurity(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any)
+> getSecurity(webId: string, securityItem: Array<string>, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Get the security information of the specified security item associated with the asset server for a specified user.
 
@@ -171,6 +178,7 @@ Name | Type | Description | Notes
  **userIdentity** | **Array<string>**| The user identity for the security information to be checked. Multiple security identities may be specified with multiple instances of the parameter. If the parameter is not specified, only the current user's security rights will be returned.. | [required]
  **forceRefresh** | **boolean**| Indicates if the security cache should be refreshed before getting security information. The default is 'false'.. | [optional]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -180,7 +188,7 @@ Observable<Models.PIItemsSecurityRights>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurityEntries**
-> getSecurityEntries(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getSecurityEntries(webId: string, nameFilter?: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve the security entries of the specified security item associated with the asset server based on the specified criteria. By default, all security entries for this asset server are returned.
 
@@ -192,6 +200,7 @@ Name | Type | Description | Notes
  **nameFilter** | **string**| The name query string used for filtering security entries. The default is no filter.. | [optional]
  **securityItem** | **string**| The security item of the desired security entries information to be returned. If the parameter is not specified, security entries of the 'Default' security item will be returned.. | [optional]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -201,7 +210,7 @@ Observable<Models.PIItemsSecurityEntry>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **createSecurityEntry**
-> createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, extraHttpRequestParams?: any)
+> createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, securityItem?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Create a security entry owned by the asset server.
 
@@ -213,6 +222,7 @@ Name | Type | Description | Notes
  **securityEntry** | **Models.PISecurityEntry**| The new security entry definition. The full list of allow and deny rights must be supplied.. | [required]
  **applyToChildren** | **boolean**| If false, the new access permissions are only applied to the associated object. If true, the access permissions of children with any parent-child reference types will change when the permissions on the primary parent change.. | [optional]
  **securityItem** | **string**| The security item of the desired security entries to be created. If the parameter is not specified, security entries of the 'Default' security item will be created.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -222,7 +232,7 @@ Observable<{}>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurityEntryByName**
-> getSecurityEntryByName(name: string, webId: string, securityItem?: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getSecurityEntryByName(name: string, webId: string, securityItem?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve the security entry of the specified security item associated with the asset server with the specified name.
 
@@ -234,6 +244,7 @@ Name | Type | Description | Notes
  **webId** | **string**| The ID of the asset server.. | [required]
  **securityItem** | **string**| The security item of the desired security entries information to be returned. If the parameter is not specified, security entries of the 'Default' security item will be returned.. | [optional]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -286,7 +297,7 @@ Observable<{}>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurityIdentities**
-> getSecurityIdentities(webId: string, field?: string, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any)
+> getSecurityIdentities(webId: string, field?: string, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve security identities based on the specified criteria. By default, all security identities in the specified Asset Server are returned.
 
@@ -301,6 +312,7 @@ Name | Type | Description | Notes
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **sortField** | **string**| The field or property of the object used to sort the returned collection. The default is 'Name'.. | [optional]
  **sortOrder** | **string**| The order that the returned collection is sorted. The default is 'Ascending'.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -310,7 +322,7 @@ Observable<Models.PIItemsSecurityIdentity>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **createSecurityIdentity**
-> createSecurityIdentity(webId: string, securityIdentity: Models.PISecurityIdentity, extraHttpRequestParams?: any)
+> createSecurityIdentity(webId: string, securityIdentity: Models.PISecurityIdentity, webIdType?: string, extraHttpRequestParams?: any)
 
 Create a security identity.
 
@@ -320,6 +332,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the asset server on which to create the security identity.. | [required]
  **securityIdentity** | **Models.PISecurityIdentity**| The new security identity definition.. | [required]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -329,7 +342,7 @@ Observable<{}>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurityIdentitiesForUser**
-> getSecurityIdentitiesForUser(webId: string, userIdentity: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getSecurityIdentitiesForUser(webId: string, userIdentity: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve security identities for a specific user.
 
@@ -340,6 +353,7 @@ Name | Type | Description | Notes
  **webId** | **string**| The ID of the server.. | [required]
  **userIdentity** | **string**| The user identity to search for.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -349,7 +363,7 @@ Observable<Models.PIItemsSecurityIdentity>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getSecurityMappings**
-> getSecurityMappings(webId: string, field?: string, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, extraHttpRequestParams?: any)
+> getSecurityMappings(webId: string, field?: string, maxCount?: number, query?: string, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve security mappings based on the specified criteria. By default, all security mappings in the specified Asset Server are returned.
 
@@ -364,6 +378,7 @@ Name | Type | Description | Notes
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **sortField** | **string**| The field or property of the object used to sort the returned collection. The default is 'Name'.. | [optional]
  **sortOrder** | **string**| The order that the returned collection is sorted. The default is 'Ascending'.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -373,7 +388,7 @@ Observable<Models.PIItemsSecurityMapping>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **createSecurityMapping**
-> createSecurityMapping(webId: string, securityMapping: Models.PISecurityMapping, extraHttpRequestParams?: any)
+> createSecurityMapping(webId: string, securityMapping: Models.PISecurityMapping, webIdType?: string, extraHttpRequestParams?: any)
 
 Create a security mapping.
 
@@ -383,6 +398,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the asset server on which to create the security mapping.. | [required]
  **securityMapping** | **Models.PISecurityMapping**| The new security mapping definition.. | [required]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -392,7 +408,7 @@ Observable<{}>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getTimeRulePlugIns**
-> getTimeRulePlugIns(webId: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getTimeRulePlugIns(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve a list of all Time Rule Plug-in's.
 
@@ -402,6 +418,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the asset server, where the Time Rule Plug-in's are installed.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -411,7 +428,7 @@ Observable<Models.PIItemsTimeRulePlugIn>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getUnitClasses**
-> getUnitClasses(webId: string, selectedFields?: string, extraHttpRequestParams?: any)
+> getUnitClasses(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Retrieve a list of all unit classes on the specified Asset Server.
 
@@ -421,6 +438,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the server.. | [required]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -430,7 +448,7 @@ Observable<Models.PIItemsUnitClass>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **createUnitClass**
-> createUnitClass(webId: string, unitClass: Models.PIUnitClass, extraHttpRequestParams?: any)
+> createUnitClass(webId: string, unitClass: Models.PIUnitClass, webIdType?: string, extraHttpRequestParams?: any)
 
 Create a unit class in the specified Asset Server.
 
@@ -440,6 +458,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the server.. | [required]
  **unitClass** | **Models.PIUnitClass**| The new unit class definition.. | [required]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type

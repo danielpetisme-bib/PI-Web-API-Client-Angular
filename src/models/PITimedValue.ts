@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -22,8 +22,9 @@ export class PITimedValue {
 	public Questionable?: boolean;
 	public Substituted?: boolean;
 	public Value?: any;
-	public Exception?: Models.PIErrors;
-	constructor(timestamp?: string, unitsAbbreviation?: string, good?: boolean, questionable?: boolean, substituted?: boolean, value?: any, exception?: Models.PIErrors)
+	public Errors?: Array<Models.PIPropertyError>;
+	public WebException?: Models.PIWebException;
+	constructor(timestamp?: string, unitsAbbreviation?: string, good?: boolean, questionable?: boolean, substituted?: boolean, value?: any, errors?: Array<Models.PIPropertyError>, webException?: Models.PIWebException)
 	{
 		if (timestamp!=null)
 		{
@@ -49,9 +50,13 @@ export class PITimedValue {
 		{
 			this.Value=value
 		}
-		if (exception!=null)
+		if (errors!=null)
 		{
-			this.Exception=exception
+			this.Errors=errors
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -19,8 +19,20 @@ export class PISecurityRights {
 	public OwnerWebId?: string;
 	public SecurityItem?: string;
 	public UserIdentity?: string;
-	public Links?: { [key: string]: string; };
-	constructor(ownerWebId?: string, securityItem?: string, userIdentity?: string, links?: { [key: string]: string; })
+	public Links?: Models.PISecurityRightsLinks;
+	public CanAnnotate?: boolean;
+	public CanDelete?: boolean;
+	public CanExecute?: boolean;
+	public CanRead?: boolean;
+	public CanReadData?: boolean;
+	public CanSubscribe?: boolean;
+	public CanSubscribeOthers?: boolean;
+	public CanWrite?: boolean;
+	public CanWriteData?: boolean;
+	public HasAdmin?: boolean;
+	public Rights?: Array<string>;
+	public WebException?: Models.PIWebException;
+	constructor(ownerWebId?: string, securityItem?: string, userIdentity?: string, links?: Models.PISecurityRightsLinks, canAnnotate?: boolean, canDelete?: boolean, canExecute?: boolean, canRead?: boolean, canReadData?: boolean, canSubscribe?: boolean, canSubscribeOthers?: boolean, canWrite?: boolean, canWriteData?: boolean, hasAdmin?: boolean, rights?: Array<string>, webException?: Models.PIWebException)
 	{
 		if (ownerWebId!=null)
 		{
@@ -37,6 +49,54 @@ export class PISecurityRights {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (canAnnotate!=null)
+		{
+			this.CanAnnotate=canAnnotate
+		}
+		if (canDelete!=null)
+		{
+			this.CanDelete=canDelete
+		}
+		if (canExecute!=null)
+		{
+			this.CanExecute=canExecute
+		}
+		if (canRead!=null)
+		{
+			this.CanRead=canRead
+		}
+		if (canReadData!=null)
+		{
+			this.CanReadData=canReadData
+		}
+		if (canSubscribe!=null)
+		{
+			this.CanSubscribe=canSubscribe
+		}
+		if (canSubscribeOthers!=null)
+		{
+			this.CanSubscribeOthers=canSubscribeOthers
+		}
+		if (canWrite!=null)
+		{
+			this.CanWrite=canWrite
+		}
+		if (canWriteData!=null)
+		{
+			this.CanWriteData=canWriteData
+		}
+		if (hasAdmin!=null)
+		{
+			this.HasAdmin=hasAdmin
+		}
+		if (rights!=null)
+		{
+			this.Rights=rights
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

@@ -10,6 +10,7 @@ Name | Type | Notes
 **canonical_unit_name** | **string**
 **canonical_unit_abbreviation** | **string**
 **path** | **string**
-**links** | **{ [key: string]: string; }**
+**links** | **[**PIUnitClassLinks**](../models/PIUnitClassLinks.md)**
+**web_exception** | **[**PIWebException**](../models/PIWebException.md)**
 
 [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)

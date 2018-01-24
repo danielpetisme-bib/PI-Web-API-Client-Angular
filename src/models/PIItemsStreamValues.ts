@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -17,8 +17,8 @@ import * as Models from './models';
 
 export class PIItemsStreamValues {
 	public Items?: Array<Models.PIStreamValues>;
-	public Links?: { [key: string]: string; };
-	constructor(items?: Array<Models.PIStreamValues>, links?: { [key: string]: string; })
+	public Links?: Models.PIPaginationLinks;
+	constructor(items?: Array<Models.PIStreamValues>, links?: Models.PIPaginationLinks)
 	{
 		if (items!=null)
 		{

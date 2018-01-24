@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -19,7 +19,8 @@ export class PISystemStatus {
 	public UpTimeInMinutes?: number;
 	public State?: string;
 	public CacheInstances?: number;
-	constructor(upTimeInMinutes?: number, state?: string, cacheInstances?: number)
+	public WebException?: Models.PIWebException;
+	constructor(upTimeInMinutes?: number, state?: string, cacheInstances?: number, webException?: Models.PIWebException)
 	{
 		if (upTimeInMinutes!=null)
 		{
@@ -32,6 +33,10 @@ export class PISystemStatus {
 		if (cacheInstances!=null)
 		{
 			this.CacheInstances=cacheInstances
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

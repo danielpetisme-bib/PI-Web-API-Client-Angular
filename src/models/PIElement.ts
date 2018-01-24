@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -25,8 +25,9 @@ export class PIElement {
 	public HasChildren?: boolean;
 	public CategoryNames?: Array<string>;
 	public ExtendedProperties?: { [key: string]: Models.PIValue; };
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, templateName?: string, hasChildren?: boolean, categoryNames?: Array<string>, extendedProperties?: { [key: string]: Models.PIValue; }, links?: { [key: string]: string; })
+	public Links?: Models.PIElementLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, templateName?: string, hasChildren?: boolean, categoryNames?: Array<string>, extendedProperties?: { [key: string]: Models.PIValue; }, links?: Models.PIElementLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -67,6 +68,10 @@ export class PIElement {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

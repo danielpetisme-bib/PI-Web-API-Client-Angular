@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PIPointAttribute = (function () {
-    function PIPointAttribute(name, value, links) {
+    function PIPointAttribute(name, value, links, webException) {
         if (name != null) {
             this.Name = name;
         }
@@ -24,6 +24,9 @@ var PIPointAttribute = (function () {
         }
         if (links != null) {
             this.Links = links;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PIPointAttribute;

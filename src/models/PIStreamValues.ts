@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -21,8 +21,9 @@ export class PIStreamValues {
 	public Path?: string;
 	public Items?: Array<Models.PITimedValue>;
 	public UnitsAbbreviation?: string;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, name?: string, path?: string, items?: Array<Models.PITimedValue>, unitsAbbreviation?: string, links?: { [key: string]: string; })
+	public Links?: Models.PIStreamValuesLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, name?: string, path?: string, items?: Array<Models.PITimedValue>, unitsAbbreviation?: string, links?: Models.PIStreamValuesLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -47,6 +48,10 @@ export class PIStreamValues {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

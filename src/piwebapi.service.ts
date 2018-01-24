@@ -101,7 +101,9 @@ export class PIWebAPIService {
     public configureInstance(basePath: string, useKerberos: boolean, username?: string, password?: string) {
         this.basePath = basePath;
         this.useKerberos = useKerberos;
-        this.defaultHeaders = new Headers({ 'Content-Type': 'application/json'});  
+        this.defaultHeaders = new Headers();
+        this.defaultHeaders.append('Content-Type', 'application/json');
+        this.defaultHeaders.append('X-Requested-With', 'PIWebApiWrapper');
         if (this.useKerberos == false)
         {
             this.username = username;

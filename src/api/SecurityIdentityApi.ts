@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class SecurityIdentityApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class SecurityIdentityApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityIdentity>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityIdentity>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class SecurityIdentityApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class SecurityIdentityApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityIdentity>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityIdentity>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class SecurityIdentityApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class SecurityIdentityApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -263,6 +271,10 @@ export class SecurityIdentityApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -276,8 +288,8 @@ export class SecurityIdentityApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -290,7 +302,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -309,6 +321,10 @@ export class SecurityIdentityApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -322,8 +338,8 @@ export class SecurityIdentityApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -336,7 +352,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -356,6 +372,10 @@ export class SecurityIdentityApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -369,8 +389,8 @@ export class SecurityIdentityApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityMappings(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityMapping>  { 
-			return this.getSecurityMappingsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getSecurityMappings(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityMapping>  { 
+			return this.getSecurityMappingsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -383,7 +403,7 @@ export class SecurityIdentityApi {
 				});
 		}
 
-		public getSecurityMappingsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityMappingsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/securityidentities/{webId}/securitymappings'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -396,6 +416,10 @@ export class SecurityIdentityApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

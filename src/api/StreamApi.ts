@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class StreamApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class StreamApi {
 			return <T1&T2>objA;
 		}
 
-		public getChannel(webId: string, includeInitialValues?: boolean, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getChannelWithHttpInfo(webId, includeInitialValues, extraHttpRequestParams)
+		public getChannel(webId: string, heartbeatRate?: number, includeInitialValues?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getChannelWithHttpInfo(webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class StreamApi {
 				});
 		}
 
-		public getChannelWithHttpInfo(webId: string, includeInitialValues?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getChannelWithHttpInfo(webId: string, heartbeatRate?: number, includeInitialValues?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streams/{webId}/channel'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -77,8 +77,16 @@ export class StreamApi {
 				throw new Error('Required parameter webId was null or undefined when calling getChannel.');
 			}
 
+			if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+				queryParameters.set('heartbeatRate', <any>heartbeatRate);
+			}
+
 			if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
 				queryParameters.set('includeInitialValues', <any>includeInitialValues);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -140,8 +148,8 @@ export class StreamApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getInterpolated(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PITimedValues>  { 
-			return this.getInterpolatedWithHttpInfo(webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams)
+		public getInterpolated(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PITimedValues>  { 
+			return this.getInterpolatedWithHttpInfo(webId, desiredUnits, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, syncTime, syncTimeBoundaryType, timeZone, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -154,7 +162,7 @@ export class StreamApi {
 				});
 		}
 
-		public getInterpolatedWithHttpInfo(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getInterpolatedWithHttpInfo(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streams/{webId}/interpolated'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -191,6 +199,14 @@ export class StreamApi {
 
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
+			}
+
+			if ((syncTime !== undefined) && (syncTime !== null)) {
+				queryParameters.set('syncTime', <any>syncTime);
+			}
+
+			if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+				queryParameters.set('syncTimeBoundaryType', <any>syncTimeBoundaryType);
 			}
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
@@ -729,8 +745,8 @@ export class StreamApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public updateValue(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.updateValueWithHttpInfo(webId, value, bufferOption, updateOption, extraHttpRequestParams)
+		public updateValue(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.updateValueWithHttpInfo(webId, value, bufferOption, updateOption, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -743,7 +759,7 @@ export class StreamApi {
 				});
 		}
 
-		public updateValueWithHttpInfo(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public updateValueWithHttpInfo(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streams/{webId}/value'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -764,6 +780,10 @@ export class StreamApi {
 
 			if ((updateOption !== undefined) && (updateOption !== null)) {
 				queryParameters.set('updateOption', <any>updateOption);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

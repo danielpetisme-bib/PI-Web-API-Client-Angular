@@ -1,15 +1,16 @@
-PI Web API client library for Angular 4
+PI Web API client library for Angular 4 (2017 R2)
 ===
 
 ## Overview
-This repository has the source code package of the PI Web API client library for Angular 4.
+This repository has the source code package of the PI Web API client library for Angular 4. This version was developed on top of the PI Web API 2017 R2 swagger specification.
 
 It was created following the steps described in this blog post published on PI Square: https://pisquare.osisoft.com/community/developers-club/blog/2017/10/30/announcing-pi-web-api-client-library-for-angular
 
 
-## Requirements.
+## Requirements
 
-Angular 4+
+ - PI Web API 2017 R2 installed within your domain using Kerberos or Basic Authentication. If you are using an older version, some methods might not work.
+ - Angular 4.0+
 
 
 ## Installation
@@ -52,10 +53,14 @@ export class AppModule { }
 
 All classes and methods are described on the [DOCUMENTATION](DOCUMENTATION.md). 
 
+## Notes
+
+ - Is is highly recommended to turn debug mode on in case you are using PI Web API 2017 R2+ in order to receive more detailed exception errors. This can be achieved by creating or editing the DebugMode attribute's value to TRUE from the System Configuration element.
+ - The X-Requested-With header is added to work with CSRF defences.
  
 ## Examples
 
-Please check the [sample_main.ts](/samples/sample_main.ts) from this repository. Below there are also code snippets written in Angular 4 for you to get started using this library:
+Please check the [sample_main.txt](/samples/sample_main.txt) from this repository. Below there are also code snippets written in Angular 4 for you to get started using this library:
 
 ### Set up the instance of the PI Web API top level object.
 
@@ -241,7 +246,7 @@ If you want to find out the order of the inputs, please refer to [DOCUMENTATION]
 
 
 ## Licensing
-Copyright 2017 OSIsoft, LLC.
+Copyright 2018 OSIsoft, LLC.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

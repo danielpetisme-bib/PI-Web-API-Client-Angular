@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -27,7 +27,8 @@ export class PISecurity {
 	public CanWriteData?: boolean;
 	public HasAdmin?: boolean;
 	public Rights?: Array<string>;
-	constructor(canAnnotate?: boolean, canDelete?: boolean, canExecute?: boolean, canRead?: boolean, canReadData?: boolean, canSubscribe?: boolean, canSubscribeOthers?: boolean, canWrite?: boolean, canWriteData?: boolean, hasAdmin?: boolean, rights?: Array<string>)
+	public WebException?: Models.PIWebException;
+	constructor(canAnnotate?: boolean, canDelete?: boolean, canExecute?: boolean, canRead?: boolean, canReadData?: boolean, canSubscribe?: boolean, canSubscribeOthers?: boolean, canWrite?: boolean, canWriteData?: boolean, hasAdmin?: boolean, rights?: Array<string>, webException?: Models.PIWebException)
 	{
 		if (canAnnotate!=null)
 		{
@@ -72,6 +73,10 @@ export class PISecurity {
 		if (rights!=null)
 		{
 			this.Rights=rights
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -18,8 +18,9 @@ import * as Models from './models';
 export class PIPointAttribute {
 	public Name?: string;
 	public Value?: any;
-	public Links?: { [key: string]: string; };
-	constructor(name?: string, value?: any, links?: { [key: string]: string; })
+	public Links?: Models.PIPointAttributeLinks;
+	public WebException?: Models.PIWebException;
+	constructor(name?: string, value?: any, links?: Models.PIPointAttributeLinks, webException?: Models.PIWebException)
 	{
 		if (name!=null)
 		{
@@ -32,6 +33,10 @@ export class PIPointAttribute {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

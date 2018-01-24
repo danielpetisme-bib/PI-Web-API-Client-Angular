@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var DataServerApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var DataServerApi = (function () {
         }
         return objA;
     };
-    DataServerApi.prototype.list = function (selectedFields, extraHttpRequestParams) {
-        return this.listWithHttpInfo(selectedFields, extraHttpRequestParams)
+    DataServerApi.prototype.list = function (selectedFields, webIdType, extraHttpRequestParams) {
+        return this.listWithHttpInfo(selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,12 +56,15 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.listWithHttpInfo = function (selectedFields, extraHttpRequestParams) {
+    DataServerApi.prototype.listWithHttpInfo = function (selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -74,8 +77,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.getByName = function (name, selectedFields, extraHttpRequestParams) {
-        return this.getByNameWithHttpInfo(name, selectedFields, extraHttpRequestParams)
+    DataServerApi.prototype.getByName = function (name, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByNameWithHttpInfo(name, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -85,7 +88,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.getByNameWithHttpInfo = function (name, selectedFields, extraHttpRequestParams) {
+    DataServerApi.prototype.getByNameWithHttpInfo = function (name, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -98,6 +101,9 @@ var DataServerApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -109,8 +115,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    DataServerApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -120,7 +126,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    DataServerApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -133,6 +139,9 @@ var DataServerApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -144,8 +153,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    DataServerApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -155,7 +164,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    DataServerApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -166,6 +175,9 @@ var DataServerApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -177,8 +189,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.getEnumerationSets = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    DataServerApi.prototype.getEnumerationSets = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +200,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.getEnumerationSetsWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    DataServerApi.prototype.getEnumerationSetsWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers/{webId}/enumerationsets'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -199,6 +211,9 @@ var DataServerApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -210,8 +225,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.createEnumerationSet = function (webId, enumerationSet, extraHttpRequestParams) {
-        return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, extraHttpRequestParams)
+    DataServerApi.prototype.createEnumerationSet = function (webId, enumerationSet, webIdType, extraHttpRequestParams) {
+        return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -221,7 +236,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.createEnumerationSetWithHttpInfo = function (webId, enumerationSet, extraHttpRequestParams) {
+    DataServerApi.prototype.createEnumerationSetWithHttpInfo = function (webId, enumerationSet, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers/{webId}/enumerationsets'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -231,6 +246,9 @@ var DataServerApi = (function () {
         }
         if (enumerationSet === null || enumerationSet === undefined) {
             throw new Error('Required parameter enumerationSet was null or undefined when calling createEnumerationSet.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,
@@ -244,8 +262,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.getPoints = function (webId, maxCount, nameFilter, selectedFields, startIndex, extraHttpRequestParams) {
-        return this.getPointsWithHttpInfo(webId, maxCount, nameFilter, selectedFields, startIndex, extraHttpRequestParams)
+    DataServerApi.prototype.getLicense = function (webId, module, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getLicenseWithHttpInfo(webId, module, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -255,7 +273,49 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.getPointsWithHttpInfo = function (webId, maxCount, nameFilter, selectedFields, startIndex, extraHttpRequestParams) {
+    DataServerApi.prototype.getLicenseWithHttpInfo = function (webId, module, selectedFields, webIdType, extraHttpRequestParams) {
+        var localVarPath = this.basePath + '/dataservers/{webId}/license'
+            .replace('{' + 'webId' + '}', String(webId));
+        var queryParameters = new http_1.URLSearchParams();
+        var headers = new http_1.Headers(this.defaultHeaders.toJSON());
+        if (webId === null || webId === undefined) {
+            throw new Error('Required parameter webId was null or undefined when calling getLicense.');
+        }
+        if (module === null || module === undefined) {
+            throw new Error('Required parameter module was null or undefined when calling getLicense.');
+        }
+        if ((module !== undefined) && (module !== null)) {
+            queryParameters.set('module', module);
+        }
+        if ((selectedFields !== undefined) && (selectedFields !== null)) {
+            queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
+        var requestOptions = new http_2.RequestOptions({
+            method: http_2.RequestMethod.Get,
+            headers: headers,
+            search: queryParameters,
+            withCredentials: this.withCredentials
+        });
+        if (extraHttpRequestParams) {
+            requestOptions = Object.assign(requestOptions, extraHttpRequestParams);
+        }
+        return this.http.request(localVarPath, requestOptions);
+    };
+    DataServerApi.prototype.getPoints = function (webId, maxCount, nameFilter, selectedFields, startIndex, webIdType, extraHttpRequestParams) {
+        return this.getPointsWithHttpInfo(webId, maxCount, nameFilter, selectedFields, startIndex, webIdType, extraHttpRequestParams)
+            .map(function (response) {
+            try {
+                return response.json();
+            }
+            catch (e) {
+                return {};
+            }
+        });
+    };
+    DataServerApi.prototype.getPointsWithHttpInfo = function (webId, maxCount, nameFilter, selectedFields, startIndex, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers/{webId}/points'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -275,6 +335,9 @@ var DataServerApi = (function () {
         if ((startIndex !== undefined) && (startIndex !== null)) {
             queryParameters.set('startIndex', startIndex);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -286,8 +349,8 @@ var DataServerApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    DataServerApi.prototype.createPoint = function (webId, pointDTO, extraHttpRequestParams) {
-        return this.createPointWithHttpInfo(webId, pointDTO, extraHttpRequestParams)
+    DataServerApi.prototype.createPoint = function (webId, pointDTO, webIdType, extraHttpRequestParams) {
+        return this.createPointWithHttpInfo(webId, pointDTO, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -297,7 +360,7 @@ var DataServerApi = (function () {
             }
         });
     };
-    DataServerApi.prototype.createPointWithHttpInfo = function (webId, pointDTO, extraHttpRequestParams) {
+    DataServerApi.prototype.createPointWithHttpInfo = function (webId, pointDTO, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/dataservers/{webId}/points'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -307,6 +370,9 @@ var DataServerApi = (function () {
         }
         if (pointDTO === null || pointDTO === undefined) {
             throw new Error('Required parameter pointDTO was null or undefined when calling createPoint.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,

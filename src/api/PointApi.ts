@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class PointApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class PointApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIPoint>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIPoint>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class PointApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/points';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class PointApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class PointApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIPoint>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIPoint>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class PointApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/points/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class PointApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class PointApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributes(webId: string, name?: Array<string>, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsPointAttribute>  { 
-			return this.getAttributesWithHttpInfo(webId, name, nameFilter, selectedFields, extraHttpRequestParams)
+		public getAttributes(webId: string, name?: Array<string>, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsPointAttribute>  { 
+			return this.getAttributesWithHttpInfo(webId, name, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class PointApi {
 				});
 		}
 
-		public getAttributesWithHttpInfo(webId: string, name?: Array<string>, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributesWithHttpInfo(webId: string, name?: Array<string>, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/points/{webId}/attributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -259,6 +267,10 @@ export class PointApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -272,8 +284,8 @@ export class PointApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributeByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIPointAttribute>  { 
-			return this.getAttributeByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getAttributeByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIPointAttribute>  { 
+			return this.getAttributeByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -286,7 +298,7 @@ export class PointApi {
 				});
 		}
 
-		public getAttributeByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributeByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/points/{webId}/attributes/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -306,6 +318,10 @@ export class PointApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -319,8 +335,8 @@ export class PointApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public updateAttributeValue(webId: string, name: string, value: any, extraHttpRequestParams?: any) : Observable<{}>  { 
-			return this.updateAttributeValueWithHttpInfo(webId, name, value, extraHttpRequestParams)
+		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemPoint>  { 
+			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -333,55 +349,7 @@ export class PointApi {
 				});
 		}
 
-		public updateAttributeValueWithHttpInfo(webId: string, name: string, value: any, extraHttpRequestParams?: any) : Observable<Response>  { 
-			const localVarPath = this.basePath + '/points/{webId}/attributes/{name}'
-				.replace('{' + 'webId' + '}', String(webId))
-				.replace('{' + 'name' + '}', String(name));
-
-			let queryParameters = new URLSearchParams();
-			let headers = new Headers(this.defaultHeaders.toJSON());
-
-			if (webId === null || webId === undefined) {
-				throw new Error('Required parameter webId was null or undefined when calling updateAttributeValue.');
-			}
-
-			if (name === null || name === undefined) {
-				throw new Error('Required parameter name was null or undefined when calling updateAttributeValue.');
-			}
-
-			if (value === null || value === undefined) {
-				throw new Error('Required parameter value was null or undefined when calling updateAttributeValue.');
-			}
-
-			let requestOptions: RequestOptionsArgs = new RequestOptions({
-				method: RequestMethod.Put,
-				headers: headers,
-				body: JSON.stringify(value),
-				search: queryParameters,
-				withCredentials: this.withCredentials,
-			});
-
-			if (extraHttpRequestParams) {
-				requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-			}
-			return this.http.request(localVarPath, requestOptions);
-		}
-
-		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemPoint>  { 
-			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams)
-				.map((response: Response) => {
-					try
-					{
-						return response.json()
-					}
-					catch(e)
-					{
-						return {};
-					}
-				});
-		}
-
-		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/points/multiple';
 
 			let queryParameters = new URLSearchParams();
@@ -409,6 +377,10 @@ export class PointApi {
 				for (let item of webId) {
 					queryParameters.append('webId', item);
 				}
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -18,7 +18,8 @@ import * as Models from './models';
 export class PISubstatus {
 	public Substatus?: number;
 	public Message?: string;
-	constructor(substatus?: number, message?: string)
+	public WebException?: Models.PIWebException;
+	constructor(substatus?: number, message?: string, webException?: Models.PIWebException)
 	{
 		if (substatus!=null)
 		{
@@ -27,6 +28,10 @@ export class PISubstatus {
 		if (message!=null)
 		{
 			this.Message=message
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

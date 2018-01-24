@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **getChannel**
-> getChannel(webId: string, includeInitialValues?: boolean, extraHttpRequestParams?: any)
+> getChannel(webId: string, heartbeatRate?: number, includeInitialValues?: boolean, webIdType?: string, extraHttpRequestParams?: any)
 
 Opens a channel that will send messages about any value changes for the specified stream.
 
@@ -26,7 +26,9 @@ Opens a channel that will send messages about any value changes for the specifie
 Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **string**| The ID of the stream.. | [required]
+ **heartbeatRate** | **number**| HeartbeatRate is an integer multiple of the Polling Interval. It specifies the rate at which a client will receive an empty message if there are no data updates. It can be used to check that the connection is still alive. Zero/negative values correspond to no heartbeat. By default, no empty messages will be sent to the user.. | [optional]
  **includeInitialValues** | **boolean**| Specified if the channel should send a message with the current value of the stream after the connection is opened. The default is 'false'.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type
@@ -56,7 +58,7 @@ Observable<Models.PITimedValue>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getInterpolated**
-> getInterpolated(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any)
+> getInterpolated(webId: string, desiredUnits?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, timeZone?: string, extraHttpRequestParams?: any)
 
 Retrieves interpolated values over the specified time range at the specified sampling interval.
 
@@ -72,6 +74,8 @@ Name | Type | Description | Notes
  **interval** | **string**| The sampling interval, in AFTimeSpan format.. | [optional]
  **selectedFields** | **string**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **startTime** | **string**| An optional start time. The default is '*-1d' for element attributes and points. For event frame attributes, the default is the event frame's start time, or '*-1d' if that is not set.. | [optional]
+ **syncTime** | **string**| An optional start time anchor, in AFTime format. When specified, interpolated data retrieval will use the sync time as the origin for calculating the interval times.. | [optional]
+ **syncTimeBoundaryType** | **string**| An optional string specifying the boundary type to use when applying a syncTime. The allowed values are 'Inside' and 'Outside'. The default is 'Inside'.. | [optional]
  **timeZone** | **string**| The time zone in which the time string will be interpreted. This parameter will be ignored if a time zone is specified in the time string. If no time zone is specified in either places, the PI Web API server time zone will be used.. | [optional]
 
 
@@ -277,7 +281,7 @@ Observable<Models.PITimedValue>
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **updateValue**
-> updateValue(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, extraHttpRequestParams?: any)
+> updateValue(webId: string, value: Models.PITimedValue, bufferOption?: string, updateOption?: string, webIdType?: string, extraHttpRequestParams?: any)
 
 Updates a value for the specified stream.
 
@@ -289,6 +293,7 @@ Name | Type | Description | Notes
  **value** | **Models.PITimedValue**| The value to add or update.. | [required]
  **bufferOption** | **string**| The desired AFBufferOption. The default is 'BufferIfPossible'.. | [optional]
  **updateOption** | **string**| The desired AFUpdateOption. The default is 'Replace'. This parameter is ignored if the attribute is a configuration item.. | [optional]
+ **webIdType** | **string**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 
 ### Return type

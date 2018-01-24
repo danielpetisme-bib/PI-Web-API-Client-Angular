@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class ElementApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class ElementApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIElement>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIElement>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class ElementApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class ElementApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIElement>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIElement>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class ElementApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class ElementApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnalyses(webId: string, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysis>  { 
-			return this.getAnalysesWithHttpInfo(webId, maxCount, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public getAnalyses(webId: string, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysis>  { 
+			return this.getAnalysesWithHttpInfo(webId, maxCount, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class ElementApi {
 				});
 		}
 
-		public getAnalysesWithHttpInfo(webId: string, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnalysesWithHttpInfo(webId: string, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/analyses'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -265,6 +273,10 @@ export class ElementApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -278,8 +290,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAnalysis(webId: string, analysis: Models.PIAnalysis, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAnalysisWithHttpInfo(webId, analysis, extraHttpRequestParams)
+		public createAnalysis(webId: string, analysis: Models.PIAnalysis, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAnalysisWithHttpInfo(webId, analysis, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -292,7 +304,7 @@ export class ElementApi {
 				});
 		}
 
-		public createAnalysisWithHttpInfo(webId: string, analysis: Models.PIAnalysis, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAnalysisWithHttpInfo(webId: string, analysis: Models.PIAnalysis, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/analyses'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -305,6 +317,10 @@ export class ElementApi {
 
 			if (analysis === null || analysis === undefined) {
 				throw new Error('Required parameter analysis was null or undefined when calling createAnalysis.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -321,8 +337,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributes(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, extraHttpRequestParams)
+		public getAttributes(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -335,7 +351,7 @@ export class ElementApi {
 				});
 		}
 
-		public getAttributesWithHttpInfo(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributesWithHttpInfo(webId: string, categoryName?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, valueType?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/attributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -394,6 +410,10 @@ export class ElementApi {
 				queryParameters.set('valueType', <any>valueType);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -407,8 +427,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAttribute(webId: string, attribute: Models.PIAttribute, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAttributeWithHttpInfo(webId, attribute, extraHttpRequestParams)
+		public createAttribute(webId: string, attribute: Models.PIAttribute, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAttributeWithHttpInfo(webId, attribute, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -421,7 +441,7 @@ export class ElementApi {
 				});
 		}
 
-		public createAttributeWithHttpInfo(webId: string, attribute: Models.PIAttribute, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAttributeWithHttpInfo(webId: string, attribute: Models.PIAttribute, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/attributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -434,6 +454,10 @@ export class ElementApi {
 
 			if (attribute === null || attribute === undefined) {
 				throw new Error('Required parameter attribute was null or undefined when calling createAttribute.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -450,8 +474,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getCategories(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
-			return this.getCategoriesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getCategories(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
+			return this.getCategoriesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -464,7 +488,7 @@ export class ElementApi {
 				});
 		}
 
-		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/categories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -477,6 +501,10 @@ export class ElementApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -534,8 +562,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public findElementAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
-			return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public findElementAttributes(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttribute>  { 
+			return this.findElementAttributesWithHttpInfo(webId, attributeCategory, attributeDescriptionFilter, attributeNameFilter, attributeType, elementCategory, elementDescriptionFilter, elementNameFilter, elementTemplate, elementType, maxCount, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -548,7 +576,7 @@ export class ElementApi {
 				});
 		}
 
-		public findElementAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public findElementAttributesWithHttpInfo(webId: string, attributeCategory?: string, attributeDescriptionFilter?: string, attributeNameFilter?: string, attributeType?: string, elementCategory?: string, elementDescriptionFilter?: string, elementNameFilter?: string, elementTemplate?: string, elementType?: string, maxCount?: number, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/elementattributes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -619,6 +647,10 @@ export class ElementApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -632,8 +664,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
-			return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+		public getElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -646,7 +678,7 @@ export class ElementApi {
 				});
 		}
 
-		public getElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/elements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -701,6 +733,10 @@ export class ElementApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -714,8 +750,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createElement(webId: string, element: Models.PIElement, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createElementWithHttpInfo(webId, element, extraHttpRequestParams)
+		public createElement(webId: string, element: Models.PIElement, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createElementWithHttpInfo(webId, element, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -728,7 +764,7 @@ export class ElementApi {
 				});
 		}
 
-		public createElementWithHttpInfo(webId: string, element: Models.PIElement, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createElementWithHttpInfo(webId: string, element: Models.PIElement, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/elements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -741,6 +777,10 @@ export class ElementApi {
 
 			if (element === null || element === undefined) {
 				throw new Error('Required parameter element was null or undefined when calling createElement.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -757,8 +797,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
-			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, extraHttpRequestParams)
+		public getEventFrames(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEventFrame>  { 
+			return this.getEventFramesWithHttpInfo(webId, canBeAcknowledged, categoryName, endTime, isAcknowledged, maxCount, nameFilter, searchMode, selectedFields, severity, sortField, sortOrder, startIndex, startTime, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -771,7 +811,7 @@ export class ElementApi {
 				});
 		}
 
-		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEventFramesWithHttpInfo(webId: string, canBeAcknowledged?: boolean, categoryName?: string, endTime?: string, isAcknowledged?: boolean, maxCount?: number, nameFilter?: string, searchMode?: string, selectedFields?: string, severity?: Array<string>, sortField?: string, sortOrder?: string, startIndex?: number, startTime?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/eventframes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -840,6 +880,10 @@ export class ElementApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -853,8 +897,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getReferencedElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
-			return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, extraHttpRequestParams)
+		public getReferencedElements(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getReferencedElementsWithHttpInfo(webId, categoryName, descriptionFilter, elementType, maxCount, nameFilter, selectedFields, sortField, sortOrder, startIndex, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -867,7 +911,7 @@ export class ElementApi {
 				});
 		}
 
-		public getReferencedElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getReferencedElementsWithHttpInfo(webId: string, categoryName?: string, descriptionFilter?: string, elementType?: string, maxCount?: number, nameFilter?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/referencedelements'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -916,6 +960,10 @@ export class ElementApi {
 
 			if ((templateName !== undefined) && (templateName !== null)) {
 				queryParameters.set('templateName', <any>templateName);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1031,8 +1079,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1045,7 +1093,7 @@ export class ElementApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1074,6 +1122,10 @@ export class ElementApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1087,8 +1139,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1101,7 +1153,7 @@ export class ElementApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1120,6 +1172,10 @@ export class ElementApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1133,8 +1189,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, extraHttpRequestParams)
+		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1147,7 +1203,7 @@ export class ElementApi {
 				});
 		}
 
-		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -1166,6 +1222,10 @@ export class ElementApi {
 				queryParameters.set('applyToChildren', <any>applyToChildren);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Post,
 				headers: headers,
@@ -1180,8 +1240,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PISecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1194,7 +1254,7 @@ export class ElementApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -1212,6 +1272,10 @@ export class ElementApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1326,8 +1390,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemElement>  { 
-			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams)
+		public getMultiple(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsItemElement>  { 
+			return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1340,7 +1404,7 @@ export class ElementApi {
 				});
 		}
 
-		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getMultipleWithHttpInfo(asParallel?: boolean, includeMode?: string, path?: Array<string>, selectedFields?: string, webId?: Array<string>, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/multiple';
 
 			let queryParameters = new URLSearchParams();
@@ -1370,6 +1434,10 @@ export class ElementApi {
 				}
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1383,8 +1451,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSearchByAttribute(search: Models.PISearchByAttributeElement, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSearchByAttributeWithHttpInfo(search, extraHttpRequestParams)
+		public getElementsQuery(databaseWebId?: string, maxCount?: number, query?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.getElementsQueryWithHttpInfo(databaseWebId, maxCount, query, selectedFields, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1397,20 +1465,39 @@ export class ElementApi {
 				});
 		}
 
-		public createSearchByAttributeWithHttpInfo(search: Models.PISearchByAttributeElement, extraHttpRequestParams?: any) : Observable<Response>  { 
-			const localVarPath = this.basePath + '/elements/searchbyattribute';
+		public getElementsQueryWithHttpInfo(databaseWebId?: string, maxCount?: number, query?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+			const localVarPath = this.basePath + '/elements/search';
 
 			let queryParameters = new URLSearchParams();
 			let headers = new Headers(this.defaultHeaders.toJSON());
 
-			if (search === null || search === undefined) {
-				throw new Error('Required parameter search was null or undefined when calling createSearchByAttribute.');
+			if ((databaseWebId !== undefined) && (databaseWebId !== null)) {
+				queryParameters.set('databaseWebId', <any>databaseWebId);
+			}
+
+			if ((maxCount !== undefined) && (maxCount !== null)) {
+				queryParameters.set('maxCount', <any>maxCount);
+			}
+
+			if ((query !== undefined) && (query !== null)) {
+				queryParameters.set('query', <any>query);
+			}
+
+			if ((selectedFields !== undefined) && (selectedFields !== null)) {
+				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((startIndex !== undefined) && (startIndex !== null)) {
+				queryParameters.set('startIndex', <any>startIndex);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
-				method: RequestMethod.Post,
+				method: RequestMethod.Get,
 				headers: headers,
-				body: JSON.stringify(search),
 				search: queryParameters,
 				withCredentials: this.withCredentials,
 			});
@@ -1421,8 +1508,8 @@ export class ElementApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public executeSearchByAttribute(searchId: string, categoryName?: string, descriptionFilter?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.executeSearchByAttributeWithHttpInfo(searchId, categoryName, descriptionFilter, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public createSearchByAttribute(query: Models.PISearchByAttribute, noResults?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.createSearchByAttributeWithHttpInfo(query, noResults, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1435,7 +1522,53 @@ export class ElementApi {
 				});
 		}
 
-		public executeSearchByAttributeWithHttpInfo(searchId: string, categoryName?: string, descriptionFilter?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSearchByAttributeWithHttpInfo(query: Models.PISearchByAttribute, noResults?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+			const localVarPath = this.basePath + '/elements/searchbyattribute';
+
+			let queryParameters = new URLSearchParams();
+			let headers = new Headers(this.defaultHeaders.toJSON());
+
+			if (query === null || query === undefined) {
+				throw new Error('Required parameter query was null or undefined when calling createSearchByAttribute.');
+			}
+
+			if ((noResults !== undefined) && (noResults !== null)) {
+				queryParameters.set('noResults', <any>noResults);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
+			let requestOptions: RequestOptionsArgs = new RequestOptions({
+				method: RequestMethod.Post,
+				headers: headers,
+				body: JSON.stringify(query),
+				search: queryParameters,
+				withCredentials: this.withCredentials,
+			});
+
+			if (extraHttpRequestParams) {
+				requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+			}
+			return this.http.request(localVarPath, requestOptions);
+		}
+
+		public executeSearchByAttribute(searchId: string, categoryName?: string, descriptionFilter?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElement>  { 
+			return this.executeSearchByAttributeWithHttpInfo(searchId, categoryName, descriptionFilter, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
+				.map((response: Response) => {
+					try
+					{
+						return response.json()
+					}
+					catch(e)
+					{
+						return {};
+					}
+				});
+		}
+
+		public executeSearchByAttributeWithHttpInfo(searchId: string, categoryName?: string, descriptionFilter?: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elements/searchbyattribute/{searchId}'
 				.replace('{' + 'searchId' + '}', String(searchId));
 
@@ -1480,6 +1613,10 @@ export class ElementApi {
 
 			if ((startIndex !== undefined) && (startIndex !== null)) {
 				queryParameters.set('startIndex', <any>startIndex);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

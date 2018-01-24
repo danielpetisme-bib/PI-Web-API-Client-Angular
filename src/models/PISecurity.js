@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PISecurity = (function () {
-    function PISecurity(canAnnotate, canDelete, canExecute, canRead, canReadData, canSubscribe, canSubscribeOthers, canWrite, canWriteData, hasAdmin, rights) {
+    function PISecurity(canAnnotate, canDelete, canExecute, canRead, canReadData, canSubscribe, canSubscribeOthers, canWrite, canWriteData, hasAdmin, rights, webException) {
         if (canAnnotate != null) {
             this.CanAnnotate = canAnnotate;
         }
@@ -48,6 +48,9 @@ var PISecurity = (function () {
         }
         if (rights != null) {
             this.Rights = rights;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PISecurity;

@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var UnitClassApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var UnitClassApi = (function () {
         }
         return objA;
     };
-    UnitClassApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    UnitClassApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var UnitClassApi = (function () {
             }
         });
     };
-    UnitClassApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    UnitClassApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/unitclasses';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -69,6 +69,9 @@ var UnitClassApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -80,8 +83,8 @@ var UnitClassApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    UnitClassApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    UnitClassApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -91,7 +94,7 @@ var UnitClassApi = (function () {
             }
         });
     };
-    UnitClassApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    UnitClassApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/unitclasses/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -101,6 +104,9 @@ var UnitClassApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -177,8 +183,8 @@ var UnitClassApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    UnitClassApi.prototype.getCanonicalUnit = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getCanonicalUnitWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    UnitClassApi.prototype.getCanonicalUnit = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getCanonicalUnitWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +194,7 @@ var UnitClassApi = (function () {
             }
         });
     };
-    UnitClassApi.prototype.getCanonicalUnitWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    UnitClassApi.prototype.getCanonicalUnitWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/unitclasses/{webId}/canonicalunit'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -199,6 +205,9 @@ var UnitClassApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -210,8 +219,8 @@ var UnitClassApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    UnitClassApi.prototype.getUnits = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getUnitsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    UnitClassApi.prototype.getUnits = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getUnitsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -221,7 +230,7 @@ var UnitClassApi = (function () {
             }
         });
     };
-    UnitClassApi.prototype.getUnitsWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    UnitClassApi.prototype.getUnitsWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/unitclasses/{webId}/units'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -232,6 +241,9 @@ var UnitClassApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -243,8 +255,8 @@ var UnitClassApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    UnitClassApi.prototype.createUnit = function (webId, unitDTO, extraHttpRequestParams) {
-        return this.createUnitWithHttpInfo(webId, unitDTO, extraHttpRequestParams)
+    UnitClassApi.prototype.createUnit = function (webId, unitDTO, webIdType, extraHttpRequestParams) {
+        return this.createUnitWithHttpInfo(webId, unitDTO, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -254,7 +266,7 @@ var UnitClassApi = (function () {
             }
         });
     };
-    UnitClassApi.prototype.createUnitWithHttpInfo = function (webId, unitDTO, extraHttpRequestParams) {
+    UnitClassApi.prototype.createUnitWithHttpInfo = function (webId, unitDTO, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/unitclasses/{webId}/units'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -264,6 +276,9 @@ var UnitClassApi = (function () {
         }
         if (unitDTO === null || unitDTO === undefined) {
             throw new Error('Required parameter unitDTO was null or undefined when calling createUnit.');
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Post,

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class UnitClassApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class UnitClassApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnitClass>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnitClass>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class UnitClassApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/unitclasses';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class UnitClassApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class UnitClassApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnitClass>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnitClass>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class UnitClassApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/unitclasses/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class UnitClassApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class UnitClassApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getCanonicalUnit(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnit>  { 
-			return this.getCanonicalUnitWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getCanonicalUnit(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnit>  { 
+			return this.getCanonicalUnitWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class UnitClassApi {
 				});
 		}
 
-		public getCanonicalUnitWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getCanonicalUnitWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/unitclasses/{webId}/canonicalunit'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -249,6 +257,10 @@ export class UnitClassApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -262,8 +274,8 @@ export class UnitClassApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getUnits(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnit>  { 
-			return this.getUnitsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getUnits(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIUnit>  { 
+			return this.getUnitsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -276,7 +288,7 @@ export class UnitClassApi {
 				});
 		}
 
-		public getUnitsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getUnitsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/unitclasses/{webId}/units'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -291,6 +303,10 @@ export class UnitClassApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -304,8 +320,8 @@ export class UnitClassApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createUnit(webId: string, unitDTO: Models.PIUnit, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createUnitWithHttpInfo(webId, unitDTO, extraHttpRequestParams)
+		public createUnit(webId: string, unitDTO: Models.PIUnit, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createUnitWithHttpInfo(webId, unitDTO, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -318,7 +334,7 @@ export class UnitClassApi {
 				});
 		}
 
-		public createUnitWithHttpInfo(webId: string, unitDTO: Models.PIUnit, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createUnitWithHttpInfo(webId: string, unitDTO: Models.PIUnit, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/unitclasses/{webId}/units'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -331,6 +347,10 @@ export class UnitClassApi {
 
 			if (unitDTO === null || unitDTO === undefined) {
 				throw new Error('Required parameter unitDTO was null or undefined when calling createUnit.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

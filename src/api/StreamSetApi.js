@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var StreamSetApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var StreamSetApi = (function () {
         }
         return objA;
     };
-    StreamSetApi.prototype.getChannel = function (webId, categoryName, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, extraHttpRequestParams) {
-        return this.getChannelWithHttpInfo(webId, categoryName, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, extraHttpRequestParams)
+    StreamSetApi.prototype.getChannel = function (webId, categoryName, heartbeatRate, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, webIdType, extraHttpRequestParams) {
+        return this.getChannelWithHttpInfo(webId, categoryName, heartbeatRate, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getChannelWithHttpInfo = function (webId, categoryName, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, extraHttpRequestParams) {
+    StreamSetApi.prototype.getChannelWithHttpInfo = function (webId, categoryName, heartbeatRate, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/channel'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -66,6 +66,9 @@ var StreamSetApi = (function () {
         }
         if ((categoryName !== undefined) && (categoryName !== null)) {
             queryParameters.set('categoryName', categoryName);
+        }
+        if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+            queryParameters.set('heartbeatRate', heartbeatRate);
         }
         if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
             queryParameters.set('includeInitialValues', includeInitialValues);
@@ -85,6 +88,9 @@ var StreamSetApi = (function () {
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -96,8 +102,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getEnd = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, extraHttpRequestParams) {
-        return this.getEndWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, extraHttpRequestParams)
+    StreamSetApi.prototype.getEnd = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, webIdType, extraHttpRequestParams) {
+        return this.getEndWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -107,7 +113,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getEndWithHttpInfo = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, extraHttpRequestParams) {
+    StreamSetApi.prototype.getEndWithHttpInfo = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/end'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -133,8 +139,17 @@ var StreamSetApi = (function () {
         if ((showHidden !== undefined) && (showHidden !== null)) {
             queryParameters.set('showHidden', showHidden);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -147,8 +162,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getInterpolated = function (webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
-        return this.getInterpolatedWithHttpInfo(webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getInterpolated = function (webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getInterpolatedWithHttpInfo(webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -158,7 +173,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getInterpolatedWithHttpInfo = function (webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getInterpolatedWithHttpInfo = function (webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/interpolated'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -196,14 +211,29 @@ var StreamSetApi = (function () {
         if ((showHidden !== undefined) && (showHidden !== null)) {
             queryParameters.set('showHidden', showHidden);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
+        }
+        if ((syncTime !== undefined) && (syncTime !== null)) {
+            queryParameters.set('syncTime', syncTime);
+        }
+        if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+            queryParameters.set('syncTimeBoundaryType', syncTimeBoundaryType);
         }
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -216,8 +246,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getInterpolatedAtTimes = function (webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams) {
-        return this.getInterpolatedAtTimesWithHttpInfo(webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getInterpolatedAtTimes = function (webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getInterpolatedAtTimesWithHttpInfo(webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -227,7 +257,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getInterpolatedAtTimesWithHttpInfo = function (webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getInterpolatedAtTimesWithHttpInfo = function (webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/interpolatedattimes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -277,6 +307,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -288,8 +321,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getPlot = function (webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
-        return this.getPlotWithHttpInfo(webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getPlot = function (webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getPlotWithHttpInfo(webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -299,7 +332,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getPlotWithHttpInfo = function (webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getPlotWithHttpInfo = function (webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/plot'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -331,6 +364,12 @@ var StreamSetApi = (function () {
         if ((showHidden !== undefined) && (showHidden !== null)) {
             queryParameters.set('showHidden', showHidden);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
@@ -339,6 +378,9 @@ var StreamSetApi = (function () {
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -351,8 +393,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecorded = function (webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
-        return this.getRecordedWithHttpInfo(webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecorded = function (webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedWithHttpInfo(webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -362,7 +404,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedWithHttpInfo = function (webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedWithHttpInfo = function (webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/recorded'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -403,6 +445,12 @@ var StreamSetApi = (function () {
         if ((showHidden !== undefined) && (showHidden !== null)) {
             queryParameters.set('showHidden', showHidden);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
@@ -411,6 +459,9 @@ var StreamSetApi = (function () {
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -463,8 +514,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecordedAtTime = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, extraHttpRequestParams) {
-        return this.getRecordedAtTimeWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecordedAtTime = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedAtTimeWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -474,7 +525,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedAtTimeWithHttpInfo = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedAtTimeWithHttpInfo = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/recordedattime'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -515,6 +566,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -526,8 +580,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecordedAtTimes = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams) {
-        return this.getRecordedAtTimesWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecordedAtTimes = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedAtTimesWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -537,7 +591,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedAtTimesWithHttpInfo = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedAtTimesWithHttpInfo = function (webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/recordedattimes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -584,6 +638,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -595,8 +652,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getSummaries = function (webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, extraHttpRequestParams) {
-        return this.getSummariesWithHttpInfo(webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getSummaries = function (webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getSummariesWithHttpInfo(webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -606,7 +663,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getSummariesWithHttpInfo = function (webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getSummariesWithHttpInfo = function (webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/summary'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -668,6 +725,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -679,8 +739,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getValues = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, time, timeZone, extraHttpRequestParams) {
-        return this.getValuesWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, time, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getValues = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, time, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getValuesWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, time, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -690,7 +750,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getValuesWithHttpInfo = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, time, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getValuesWithHttpInfo = function (webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, time, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/{webId}/value'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -716,6 +776,12 @@ var StreamSetApi = (function () {
         if ((showHidden !== undefined) && (showHidden !== null)) {
             queryParameters.set('showHidden', showHidden);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((templateName !== undefined) && (templateName !== null)) {
             queryParameters.set('templateName', templateName);
         }
@@ -724,6 +790,9 @@ var StreamSetApi = (function () {
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -776,8 +845,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getChannelAdHoc = function (webId, includeInitialValues, extraHttpRequestParams) {
-        return this.getChannelAdHocWithHttpInfo(webId, includeInitialValues, extraHttpRequestParams)
+    StreamSetApi.prototype.getChannelAdHoc = function (webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams) {
+        return this.getChannelAdHocWithHttpInfo(webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -787,7 +856,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getChannelAdHocWithHttpInfo = function (webId, includeInitialValues, extraHttpRequestParams) {
+    StreamSetApi.prototype.getChannelAdHocWithHttpInfo = function (webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/channel';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -800,8 +869,14 @@ var StreamSetApi = (function () {
                 queryParameters.append('webId', item);
             }
         }
+        if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+            queryParameters.set('heartbeatRate', heartbeatRate);
+        }
         if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
             queryParameters.set('includeInitialValues', includeInitialValues);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -814,8 +889,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getEndAdHoc = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getEndAdHocWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    StreamSetApi.prototype.getEndAdHoc = function (webId, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
+        return this.getEndAdHocWithHttpInfo(webId, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -825,7 +900,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getEndAdHocWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    StreamSetApi.prototype.getEndAdHocWithHttpInfo = function (webId, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/end';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -841,6 +916,15 @@ var StreamSetApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -852,8 +936,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getInterpolatedAdHoc = function (webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams) {
-        return this.getInterpolatedAdHocWithHttpInfo(webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getInterpolatedAdHoc = function (webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getInterpolatedAdHocWithHttpInfo(webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -863,7 +947,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getInterpolatedAdHocWithHttpInfo = function (webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getInterpolatedAdHocWithHttpInfo = function (webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/interpolated';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -891,11 +975,26 @@ var StreamSetApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
+        if ((syncTime !== undefined) && (syncTime !== null)) {
+            queryParameters.set('syncTime', syncTime);
+        }
+        if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+            queryParameters.set('syncTimeBoundaryType', syncTimeBoundaryType);
+        }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -908,8 +1007,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getInterpolatedAtTimesAdHoc = function (time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, extraHttpRequestParams) {
-        return this.getInterpolatedAtTimesAdHocWithHttpInfo(time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getInterpolatedAtTimesAdHoc = function (time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getInterpolatedAtTimesAdHocWithHttpInfo(time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -919,7 +1018,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getInterpolatedAtTimesAdHocWithHttpInfo = function (time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getInterpolatedAtTimesAdHocWithHttpInfo = function (time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/interpolatedattimes';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -956,6 +1055,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -967,8 +1069,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getPlotAdHoc = function (webId, endTime, intervals, selectedFields, startTime, timeZone, extraHttpRequestParams) {
-        return this.getPlotAdHocWithHttpInfo(webId, endTime, intervals, selectedFields, startTime, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getPlotAdHoc = function (webId, endTime, intervals, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getPlotAdHocWithHttpInfo(webId, endTime, intervals, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -978,7 +1080,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getPlotAdHocWithHttpInfo = function (webId, endTime, intervals, selectedFields, startTime, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getPlotAdHocWithHttpInfo = function (webId, endTime, intervals, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/plot';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1000,11 +1102,20 @@ var StreamSetApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1017,8 +1128,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecordedAdHoc = function (webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, extraHttpRequestParams) {
-        return this.getRecordedAdHocWithHttpInfo(webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecordedAdHoc = function (webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedAdHocWithHttpInfo(webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1028,7 +1139,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedAdHocWithHttpInfo = function (webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedAdHocWithHttpInfo = function (webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/recorded';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1059,11 +1170,20 @@ var StreamSetApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((startTime !== undefined) && (startTime !== null)) {
             queryParameters.set('startTime', startTime);
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -1112,8 +1232,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecordedAtTimeAdHoc = function (time, webId, retrievalMode, selectedFields, timeZone, extraHttpRequestParams) {
-        return this.getRecordedAtTimeAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecordedAtTimeAdHoc = function (time, webId, retrievalMode, selectedFields, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedAtTimeAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1123,7 +1243,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedAtTimeAdHocWithHttpInfo = function (time, webId, retrievalMode, selectedFields, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedAtTimeAdHocWithHttpInfo = function (time, webId, retrievalMode, selectedFields, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/recordedattime';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1151,6 +1271,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1162,8 +1285,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getRecordedAtTimesAdHoc = function (time, webId, retrievalMode, selectedFields, sortOrder, timeZone, extraHttpRequestParams) {
-        return this.getRecordedAtTimesAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, sortOrder, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getRecordedAtTimesAdHoc = function (time, webId, retrievalMode, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getRecordedAtTimesAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1173,7 +1296,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getRecordedAtTimesAdHocWithHttpInfo = function (time, webId, retrievalMode, selectedFields, sortOrder, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getRecordedAtTimesAdHocWithHttpInfo = function (time, webId, retrievalMode, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/recordedattimes';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1207,6 +1330,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1218,8 +1344,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getSummariesAdHoc = function (webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, extraHttpRequestParams) {
-        return this.getSummariesAdHocWithHttpInfo(webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getSummariesAdHoc = function (webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getSummariesAdHocWithHttpInfo(webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1229,7 +1355,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getSummariesAdHocWithHttpInfo = function (webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getSummariesAdHocWithHttpInfo = function (webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/summary';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1278,6 +1404,9 @@ var StreamSetApi = (function () {
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -1289,8 +1418,8 @@ var StreamSetApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    StreamSetApi.prototype.getValuesAdHoc = function (webId, selectedFields, time, timeZone, extraHttpRequestParams) {
-        return this.getValuesAdHocWithHttpInfo(webId, selectedFields, time, timeZone, extraHttpRequestParams)
+    StreamSetApi.prototype.getValuesAdHoc = function (webId, selectedFields, sortField, sortOrder, time, timeZone, webIdType, extraHttpRequestParams) {
+        return this.getValuesAdHocWithHttpInfo(webId, selectedFields, sortField, sortOrder, time, timeZone, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -1300,7 +1429,7 @@ var StreamSetApi = (function () {
             }
         });
     };
-    StreamSetApi.prototype.getValuesAdHocWithHttpInfo = function (webId, selectedFields, time, timeZone, extraHttpRequestParams) {
+    StreamSetApi.prototype.getValuesAdHocWithHttpInfo = function (webId, selectedFields, sortField, sortOrder, time, timeZone, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/streamsets/value';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -1316,11 +1445,20 @@ var StreamSetApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((sortField !== undefined) && (sortField !== null)) {
+            queryParameters.set('sortField', sortField);
+        }
+        if ((sortOrder !== undefined) && (sortOrder !== null)) {
+            queryParameters.set('sortOrder', sortOrder);
+        }
         if ((time !== undefined) && (time !== null)) {
             queryParameters.set('time', time);
         }
         if ((timeZone !== undefined) && (timeZone !== null)) {
             queryParameters.set('timeZone', timeZone);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,

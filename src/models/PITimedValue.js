@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PITimedValue = (function () {
-    function PITimedValue(timestamp, unitsAbbreviation, good, questionable, substituted, value, exception) {
+    function PITimedValue(timestamp, unitsAbbreviation, good, questionable, substituted, value, errors, webException) {
         if (timestamp != null) {
             this.Timestamp = timestamp;
         }
@@ -34,8 +34,11 @@ var PITimedValue = (function () {
         if (value != null) {
             this.Value = value;
         }
-        if (exception != null) {
-            this.Exception = exception;
+        if (errors != null) {
+            this.Errors = errors;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PITimedValue;

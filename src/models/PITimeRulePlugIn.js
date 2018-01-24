@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PITimeRulePlugIn = (function () {
-    function PITimeRulePlugIn(webId, id, name, description, path, assemblyFileName, assemblyID, assemblyLoadProperties, assemblyTime, compatibilityVersion, isBrowsable, isNonEditableConfig, loadedAssemblyTime, loadedVersion, version, links) {
+    function PITimeRulePlugIn(webId, id, name, description, path, assemblyFileName, assemblyID, assemblyLoadProperties, assemblyTime, compatibilityVersion, isBrowsable, isNonEditableConfig, loadedAssemblyTime, loadedVersion, version, links, webException) {
         if (webId != null) {
             this.WebId = webId;
         }
@@ -63,6 +63,9 @@ var PITimeRulePlugIn = (function () {
         }
         if (links != null) {
             this.Links = links;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PITimeRulePlugIn;

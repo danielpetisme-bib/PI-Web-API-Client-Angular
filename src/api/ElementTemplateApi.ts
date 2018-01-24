@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class ElementTemplateApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class ElementTemplateApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIElementTemplate>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIElementTemplate>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class ElementTemplateApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIElementTemplate>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIElementTemplate>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class ElementTemplateApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnalysisTemplates(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisTemplate>  { 
-			return this.getAnalysisTemplatesWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getAnalysisTemplates(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisTemplate>  { 
+			return this.getAnalysisTemplatesWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getAnalysisTemplatesWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnalysisTemplatesWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/analysistemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -247,6 +255,10 @@ export class ElementTemplateApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -262,8 +274,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAttributeTemplates(webId: string, selectedFields?: string, showInherited?: boolean, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttributeTemplate>  { 
-			return this.getAttributeTemplatesWithHttpInfo(webId, selectedFields, showInherited, extraHttpRequestParams)
+		public getAttributeTemplates(webId: string, selectedFields?: string, showInherited?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAttributeTemplate>  { 
+			return this.getAttributeTemplatesWithHttpInfo(webId, selectedFields, showInherited, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -276,7 +288,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getAttributeTemplatesWithHttpInfo(webId: string, selectedFields?: string, showInherited?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAttributeTemplatesWithHttpInfo(webId: string, selectedFields?: string, showInherited?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/attributetemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -295,6 +307,10 @@ export class ElementTemplateApi {
 				queryParameters.set('showInherited', <any>showInherited);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -308,8 +324,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAttributeTemplate(webId: string, template: Models.PIAttributeTemplate, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAttributeTemplateWithHttpInfo(webId, template, extraHttpRequestParams)
+		public createAttributeTemplate(webId: string, template: Models.PIAttributeTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAttributeTemplateWithHttpInfo(webId, template, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -322,7 +338,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public createAttributeTemplateWithHttpInfo(webId: string, template: Models.PIAttributeTemplate, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAttributeTemplateWithHttpInfo(webId: string, template: Models.PIAttributeTemplate, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/attributetemplates'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -335,6 +351,10 @@ export class ElementTemplateApi {
 
 			if (template === null || template === undefined) {
 				throw new Error('Required parameter template was null or undefined when calling createAttributeTemplate.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -351,8 +371,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getCategories(webId: string, selectedFields?: string, showInherited?: boolean, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
-			return this.getCategoriesWithHttpInfo(webId, selectedFields, showInherited, extraHttpRequestParams)
+		public getCategories(webId: string, selectedFields?: string, showInherited?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsElementCategory>  { 
+			return this.getCategoriesWithHttpInfo(webId, selectedFields, showInherited, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -365,7 +385,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, showInherited?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getCategoriesWithHttpInfo(webId: string, selectedFields?: string, showInherited?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/categories'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -384,6 +404,10 @@ export class ElementTemplateApi {
 				queryParameters.set('showInherited', <any>showInherited);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -397,8 +421,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
-			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, extraHttpRequestParams)
+		public getSecurity(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityRights>  { 
+			return this.getSecurityWithHttpInfo(webId, userIdentity, forceRefresh, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -411,7 +435,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityWithHttpInfo(webId: string, userIdentity: Array<string>, forceRefresh?: boolean, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/security'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -440,6 +464,10 @@ export class ElementTemplateApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -453,8 +481,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, extraHttpRequestParams)
+		public getSecurityEntries(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntriesWithHttpInfo(webId, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -467,7 +495,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntriesWithHttpInfo(webId: string, nameFilter?: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -486,6 +514,10 @@ export class ElementTemplateApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -499,8 +531,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, extraHttpRequestParams)
+		public createSecurityEntry(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createSecurityEntryWithHttpInfo(webId, securityEntry, applyToChildren, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -513,7 +545,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createSecurityEntryWithHttpInfo(webId: string, securityEntry: Models.PISecurityEntry, applyToChildren?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/securityentries'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -532,6 +564,10 @@ export class ElementTemplateApi {
 				queryParameters.set('applyToChildren', <any>applyToChildren);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Post,
 				headers: headers,
@@ -546,8 +582,8 @@ export class ElementTemplateApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
-			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+		public getSecurityEntryByName(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsSecurityEntry>  { 
+			return this.getSecurityEntryByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -560,7 +596,7 @@ export class ElementTemplateApi {
 				});
 		}
 
-		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSecurityEntryByNameWithHttpInfo(name: string, webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/elementtemplates/{webId}/securityentries/{name}'
 				.replace('{' + 'name' + '}', String(name))
 				.replace('{' + 'webId' + '}', String(webId));
@@ -578,6 +614,10 @@ export class ElementTemplateApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

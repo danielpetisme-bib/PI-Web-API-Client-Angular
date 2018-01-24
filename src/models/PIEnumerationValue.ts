@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -22,13 +22,15 @@ export class PIEnumerationValue {
 	public Description?: string;
 	public Value?: number;
 	public Path?: string;
-	public Links?: { [key: string]: string; };
+	public Parent?: string;
+	public Links?: Models.PIEnumerationValueLinks;
 	public SerializeWebId?: boolean;
 	public SerializeId?: boolean;
 	public SerializeDescription?: boolean;
 	public SerializePath?: boolean;
 	public SerializeLinks?: boolean;
-	constructor(webId?: string, id?: string, name?: string, description?: string, value?: number, path?: string, links?: { [key: string]: string; }, serializeWebId?: boolean, serializeId?: boolean, serializeDescription?: boolean, serializePath?: boolean, serializeLinks?: boolean)
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, value?: number, path?: string, parent?: string, links?: Models.PIEnumerationValueLinks, serializeWebId?: boolean, serializeId?: boolean, serializeDescription?: boolean, serializePath?: boolean, serializeLinks?: boolean, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -54,6 +56,10 @@ export class PIEnumerationValue {
 		{
 			this.Path=path
 		}
+		if (parent!=null)
+		{
+			this.Parent=parent
+		}
 		if (links!=null)
 		{
 			this.Links=links
@@ -77,6 +83,10 @@ export class PIEnumerationValue {
 		if (serializeLinks!=null)
 		{
 			this.SerializeLinks=serializeLinks
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

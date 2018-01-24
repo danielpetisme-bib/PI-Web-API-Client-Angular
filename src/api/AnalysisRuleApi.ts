@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class AnalysisRuleApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class AnalysisRuleApi {
 			return <T1&T2>objA;
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnalysisRule>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnalysisRule>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class AnalysisRuleApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/analysisrules';
 
 			let queryParameters = new URLSearchParams();
@@ -84,6 +84,10 @@ export class AnalysisRuleApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -97,8 +101,8 @@ export class AnalysisRuleApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnalysisRule>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIAnalysisRule>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -111,7 +115,7 @@ export class AnalysisRuleApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/analysisrules/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -124,6 +128,10 @@ export class AnalysisRuleApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -220,8 +228,8 @@ export class AnalysisRuleApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getAnalysisRules(webId: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisRule>  { 
-			return this.getAnalysisRulesWithHttpInfo(webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, extraHttpRequestParams)
+		public getAnalysisRules(webId: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsAnalysisRule>  { 
+			return this.getAnalysisRulesWithHttpInfo(webId, maxCount, nameFilter, searchFullHierarchy, selectedFields, sortField, sortOrder, startIndex, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -234,7 +242,7 @@ export class AnalysisRuleApi {
 				});
 		}
 
-		public getAnalysisRulesWithHttpInfo(webId: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getAnalysisRulesWithHttpInfo(webId: string, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, sortField?: string, sortOrder?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/analysisrules/{webId}/analysisrules'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -273,6 +281,10 @@ export class AnalysisRuleApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -286,8 +298,8 @@ export class AnalysisRuleApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createAnalysisRule(webId: string, analysisRule: Models.PIAnalysisRule, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createAnalysisRuleWithHttpInfo(webId, analysisRule, extraHttpRequestParams)
+		public createAnalysisRule(webId: string, analysisRule: Models.PIAnalysisRule, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createAnalysisRuleWithHttpInfo(webId, analysisRule, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -300,7 +312,7 @@ export class AnalysisRuleApi {
 				});
 		}
 
-		public createAnalysisRuleWithHttpInfo(webId: string, analysisRule: Models.PIAnalysisRule, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createAnalysisRuleWithHttpInfo(webId: string, analysisRule: Models.PIAnalysisRule, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/analysisrules/{webId}/analysisrules'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -313,6 +325,10 @@ export class AnalysisRuleApi {
 
 			if (analysisRule === null || analysisRule === undefined) {
 				throw new Error('Required parameter analysisRule was null or undefined when calling createAnalysisRule.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

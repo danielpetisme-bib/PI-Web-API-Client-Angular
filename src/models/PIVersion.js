@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PIVersion = (function () {
-    function PIVersion(fullVersion, majorMinorRevision, build) {
+    function PIVersion(fullVersion, majorMinorRevision, build, webException) {
         if (fullVersion != null) {
             this.FullVersion = fullVersion;
         }
@@ -24,6 +24,9 @@ var PIVersion = (function () {
         }
         if (build != null) {
             this.Build = build;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PIVersion;

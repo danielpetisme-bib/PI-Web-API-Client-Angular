@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class StreamSetApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class StreamSetApi {
 			return <T1&T2>objA;
 		}
 
-		public getChannel(webId: string, categoryName?: string, includeInitialValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, showExcluded?: boolean, showHidden?: boolean, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getChannelWithHttpInfo(webId, categoryName, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, extraHttpRequestParams)
+		public getChannel(webId: string, categoryName?: string, heartbeatRate?: number, includeInitialValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, showExcluded?: boolean, showHidden?: boolean, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getChannelWithHttpInfo(webId, categoryName, heartbeatRate, includeInitialValues, nameFilter, searchFullHierarchy, showExcluded, showHidden, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getChannelWithHttpInfo(webId: string, categoryName?: string, includeInitialValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, showExcluded?: boolean, showHidden?: boolean, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getChannelWithHttpInfo(webId: string, categoryName?: string, heartbeatRate?: number, includeInitialValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, showExcluded?: boolean, showHidden?: boolean, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/channel'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -79,6 +79,10 @@ export class StreamSetApi {
 
 			if ((categoryName !== undefined) && (categoryName !== null)) {
 				queryParameters.set('categoryName', <any>categoryName);
+			}
+
+			if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+				queryParameters.set('heartbeatRate', <any>heartbeatRate);
 			}
 
 			if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
@@ -105,6 +109,10 @@ export class StreamSetApi {
 				queryParameters.set('templateName', <any>templateName);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -118,8 +126,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEnd(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getEndWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, extraHttpRequestParams)
+		public getEnd(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getEndWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -132,7 +140,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getEndWithHttpInfo(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEndWithHttpInfo(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, templateName?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/end'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -167,8 +175,20 @@ export class StreamSetApi {
 				queryParameters.set('showHidden', <any>showHidden);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((templateName !== undefined) && (templateName !== null)) {
 				queryParameters.set('templateName', <any>templateName);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -184,8 +204,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getInterpolated(webId: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getInterpolatedWithHttpInfo(webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+		public getInterpolated(webId: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getInterpolatedWithHttpInfo(webId, categoryName, endTime, filterExpression, includeFilteredValues, interval, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -198,7 +218,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getInterpolatedWithHttpInfo(webId: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getInterpolatedWithHttpInfo(webId: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/interpolated'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -249,8 +269,24 @@ export class StreamSetApi {
 				queryParameters.set('showHidden', <any>showHidden);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
+			}
+
+			if ((syncTime !== undefined) && (syncTime !== null)) {
+				queryParameters.set('syncTime', <any>syncTime);
+			}
+
+			if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+				queryParameters.set('syncTimeBoundaryType', <any>syncTimeBoundaryType);
 			}
 
 			if ((templateName !== undefined) && (templateName !== null)) {
@@ -259,6 +295,10 @@ export class StreamSetApi {
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -274,8 +314,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getInterpolatedAtTimes(webId: string, time: Array<string>, categoryName?: string, filterExpression?: string, includeFilteredValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getInterpolatedAtTimesWithHttpInfo(webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams)
+		public getInterpolatedAtTimes(webId: string, time: Array<string>, categoryName?: string, filterExpression?: string, includeFilteredValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getInterpolatedAtTimesWithHttpInfo(webId, time, categoryName, filterExpression, includeFilteredValues, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -288,7 +328,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getInterpolatedAtTimesWithHttpInfo(webId: string, time: Array<string>, categoryName?: string, filterExpression?: string, includeFilteredValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getInterpolatedAtTimesWithHttpInfo(webId: string, time: Array<string>, categoryName?: string, filterExpression?: string, includeFilteredValues?: boolean, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/interpolatedattimes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -353,6 +393,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -366,8 +410,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getPlot(webId: string, categoryName?: string, endTime?: string, intervals?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getPlotWithHttpInfo(webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+		public getPlot(webId: string, categoryName?: string, endTime?: string, intervals?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getPlotWithHttpInfo(webId, categoryName, endTime, intervals, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -380,7 +424,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getPlotWithHttpInfo(webId: string, categoryName?: string, endTime?: string, intervals?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getPlotWithHttpInfo(webId: string, categoryName?: string, endTime?: string, intervals?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/plot'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -423,6 +467,14 @@ export class StreamSetApi {
 				queryParameters.set('showHidden', <any>showHidden);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
 			}
@@ -433,6 +485,10 @@ export class StreamSetApi {
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -448,8 +504,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecorded(webId: string, boundaryType?: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getRecordedWithHttpInfo(webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, templateName, timeZone, extraHttpRequestParams)
+		public getRecorded(webId: string, boundaryType?: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getRecordedWithHttpInfo(webId, boundaryType, categoryName, endTime, filterExpression, includeFilteredValues, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startTime, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -462,7 +518,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedWithHttpInfo(webId: string, boundaryType?: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedWithHttpInfo(webId: string, boundaryType?: string, categoryName?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, startTime?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/recorded'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -517,6 +573,14 @@ export class StreamSetApi {
 				queryParameters.set('showHidden', <any>showHidden);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
 			}
@@ -527,6 +591,10 @@ export class StreamSetApi {
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -593,8 +661,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecordedAtTime(webId: string, time: string, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getRecordedAtTimeWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, extraHttpRequestParams)
+		public getRecordedAtTime(webId: string, time: string, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getRecordedAtTimeWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -607,7 +675,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedAtTimeWithHttpInfo(webId: string, time: string, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedAtTimeWithHttpInfo(webId: string, time: string, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/recordedattime'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -662,6 +730,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -675,8 +747,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecordedAtTimes(webId: string, time: Array<string>, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getRecordedAtTimesWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, extraHttpRequestParams)
+		public getRecordedAtTimes(webId: string, time: Array<string>, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getRecordedAtTimesWithHttpInfo(webId, time, categoryName, nameFilter, retrievalMode, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortOrder, templateName, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -689,7 +761,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedAtTimesWithHttpInfo(webId: string, time: Array<string>, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedAtTimesWithHttpInfo(webId: string, time: Array<string>, categoryName?: string, nameFilter?: string, retrievalMode?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortOrder?: string, templateName?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/recordedattimes'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -750,6 +822,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -763,8 +839,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSummaries(webId: string, calculationBasis?: string, categoryName?: string, endTime?: string, filterExpression?: string, nameFilter?: string, sampleInterval?: string, sampleType?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, templateName?: string, timeType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamSummaries>  { 
-			return this.getSummariesWithHttpInfo(webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, extraHttpRequestParams)
+		public getSummaries(webId: string, calculationBasis?: string, categoryName?: string, endTime?: string, filterExpression?: string, nameFilter?: string, sampleInterval?: string, sampleType?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, templateName?: string, timeType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamSummaries>  { 
+			return this.getSummariesWithHttpInfo(webId, calculationBasis, categoryName, endTime, filterExpression, nameFilter, sampleInterval, sampleType, searchFullHierarchy, selectedFields, showExcluded, showHidden, startTime, summaryDuration, summaryType, templateName, timeType, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -777,7 +853,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getSummariesWithHttpInfo(webId: string, calculationBasis?: string, categoryName?: string, endTime?: string, filterExpression?: string, nameFilter?: string, sampleInterval?: string, sampleType?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, templateName?: string, timeType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSummariesWithHttpInfo(webId: string, calculationBasis?: string, categoryName?: string, endTime?: string, filterExpression?: string, nameFilter?: string, sampleInterval?: string, sampleType?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, templateName?: string, timeType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/summary'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -858,6 +934,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -871,8 +951,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getValues(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, time?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getValuesWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, templateName, time, timeZone, extraHttpRequestParams)
+		public getValues(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, templateName?: string, time?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getValuesWithHttpInfo(webId, categoryName, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, templateName, time, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -885,7 +965,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getValuesWithHttpInfo(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, templateName?: string, time?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getValuesWithHttpInfo(webId: string, categoryName?: string, nameFilter?: string, searchFullHierarchy?: boolean, selectedFields?: string, showExcluded?: boolean, showHidden?: boolean, sortField?: string, sortOrder?: string, templateName?: string, time?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/{webId}/value'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -920,6 +1000,14 @@ export class StreamSetApi {
 				queryParameters.set('showHidden', <any>showHidden);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((templateName !== undefined) && (templateName !== null)) {
 				queryParameters.set('templateName', <any>templateName);
 			}
@@ -930,6 +1018,10 @@ export class StreamSetApi {
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -996,8 +1088,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getChannelAdHoc(webId: Array<string>, includeInitialValues?: boolean, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getChannelAdHocWithHttpInfo(webId, includeInitialValues, extraHttpRequestParams)
+		public getChannelAdHoc(webId: Array<string>, heartbeatRate?: number, includeInitialValues?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getChannelAdHocWithHttpInfo(webId, heartbeatRate, includeInitialValues, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1010,7 +1102,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getChannelAdHocWithHttpInfo(webId: Array<string>, includeInitialValues?: boolean, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getChannelAdHocWithHttpInfo(webId: Array<string>, heartbeatRate?: number, includeInitialValues?: boolean, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/channel';
 
 			let queryParameters = new URLSearchParams();
@@ -1026,8 +1118,16 @@ export class StreamSetApi {
 				}
 			}
 
+			if ((heartbeatRate !== undefined) && (heartbeatRate !== null)) {
+				queryParameters.set('heartbeatRate', <any>heartbeatRate);
+			}
+
 			if ((includeInitialValues !== undefined) && (includeInitialValues !== null)) {
 				queryParameters.set('includeInitialValues', <any>includeInitialValues);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1043,8 +1143,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEndAdHoc(webId: Array<string>, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getEndAdHocWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getEndAdHoc(webId: Array<string>, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getEndAdHocWithHttpInfo(webId, selectedFields, sortField, sortOrder, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1057,7 +1157,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getEndAdHocWithHttpInfo(webId: Array<string>, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEndAdHocWithHttpInfo(webId: Array<string>, selectedFields?: string, sortField?: string, sortOrder?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/end';
 
 			let queryParameters = new URLSearchParams();
@@ -1077,6 +1177,18 @@ export class StreamSetApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1090,8 +1202,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getInterpolatedAdHoc(webId: Array<string>, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getInterpolatedAdHocWithHttpInfo(webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, startTime, timeZone, extraHttpRequestParams)
+		public getInterpolatedAdHoc(webId: Array<string>, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getInterpolatedAdHocWithHttpInfo(webId, endTime, filterExpression, includeFilteredValues, interval, selectedFields, sortField, sortOrder, startTime, syncTime, syncTimeBoundaryType, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1104,7 +1216,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getInterpolatedAdHocWithHttpInfo(webId: Array<string>, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getInterpolatedAdHocWithHttpInfo(webId: Array<string>, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, interval?: string, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, syncTime?: string, syncTimeBoundaryType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/interpolated';
 
 			let queryParameters = new URLSearchParams();
@@ -1140,12 +1252,32 @@ export class StreamSetApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
 			}
 
+			if ((syncTime !== undefined) && (syncTime !== null)) {
+				queryParameters.set('syncTime', <any>syncTime);
+			}
+
+			if ((syncTimeBoundaryType !== undefined) && (syncTimeBoundaryType !== null)) {
+				queryParameters.set('syncTimeBoundaryType', <any>syncTimeBoundaryType);
+			}
+
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1161,8 +1293,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getInterpolatedAtTimesAdHoc(time: Array<string>, webId: Array<string>, filterExpression?: string, includeFilteredValues?: boolean, selectedFields?: string, sortOrder?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getInterpolatedAtTimesAdHocWithHttpInfo(time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, extraHttpRequestParams)
+		public getInterpolatedAtTimesAdHoc(time: Array<string>, webId: Array<string>, filterExpression?: string, includeFilteredValues?: boolean, selectedFields?: string, sortOrder?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getInterpolatedAtTimesAdHocWithHttpInfo(time, webId, filterExpression, includeFilteredValues, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1175,7 +1307,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getInterpolatedAtTimesAdHocWithHttpInfo(time: Array<string>, webId: Array<string>, filterExpression?: string, includeFilteredValues?: boolean, selectedFields?: string, sortOrder?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getInterpolatedAtTimesAdHocWithHttpInfo(time: Array<string>, webId: Array<string>, filterExpression?: string, includeFilteredValues?: boolean, selectedFields?: string, sortOrder?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/interpolatedattimes';
 
 			let queryParameters = new URLSearchParams();
@@ -1221,6 +1353,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1234,8 +1370,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getPlotAdHoc(webId: Array<string>, endTime?: string, intervals?: number, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getPlotAdHocWithHttpInfo(webId, endTime, intervals, selectedFields, startTime, timeZone, extraHttpRequestParams)
+		public getPlotAdHoc(webId: Array<string>, endTime?: string, intervals?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getPlotAdHocWithHttpInfo(webId, endTime, intervals, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1248,7 +1384,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getPlotAdHocWithHttpInfo(webId: Array<string>, endTime?: string, intervals?: number, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getPlotAdHocWithHttpInfo(webId: Array<string>, endTime?: string, intervals?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/plot';
 
 			let queryParameters = new URLSearchParams();
@@ -1276,12 +1412,24 @@ export class StreamSetApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
 			}
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1297,8 +1445,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecordedAdHoc(webId: Array<string>, boundaryType?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getRecordedAdHocWithHttpInfo(webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, extraHttpRequestParams)
+		public getRecordedAdHoc(webId: Array<string>, boundaryType?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getRecordedAdHocWithHttpInfo(webId, boundaryType, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, sortField, sortOrder, startTime, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1311,7 +1459,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedAdHocWithHttpInfo(webId: Array<string>, boundaryType?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, selectedFields?: string, startTime?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedAdHocWithHttpInfo(webId: Array<string>, boundaryType?: string, endTime?: string, filterExpression?: string, includeFilteredValues?: boolean, maxCount?: number, selectedFields?: string, sortField?: string, sortOrder?: string, startTime?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/recorded';
 
 			let queryParameters = new URLSearchParams();
@@ -1351,12 +1499,24 @@ export class StreamSetApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((startTime !== undefined) && (startTime !== null)) {
 				queryParameters.set('startTime', <any>startTime);
 			}
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1418,8 +1578,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecordedAtTimeAdHoc(time: string, webId: Array<string>, retrievalMode?: string, selectedFields?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getRecordedAtTimeAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, timeZone, extraHttpRequestParams)
+		public getRecordedAtTimeAdHoc(time: string, webId: Array<string>, retrievalMode?: string, selectedFields?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getRecordedAtTimeAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1432,7 +1592,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedAtTimeAdHocWithHttpInfo(time: string, webId: Array<string>, retrievalMode?: string, selectedFields?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedAtTimeAdHocWithHttpInfo(time: string, webId: Array<string>, retrievalMode?: string, selectedFields?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/recordedattime';
 
 			let queryParameters = new URLSearchParams();
@@ -1468,6 +1628,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1481,8 +1645,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getRecordedAtTimesAdHoc(time: Array<string>, webId: Array<string>, retrievalMode?: string, selectedFields?: string, sortOrder?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
-			return this.getRecordedAtTimesAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, sortOrder, timeZone, extraHttpRequestParams)
+		public getRecordedAtTimesAdHoc(time: Array<string>, webId: Array<string>, retrievalMode?: string, selectedFields?: string, sortOrder?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValues>  { 
+			return this.getRecordedAtTimesAdHocWithHttpInfo(time, webId, retrievalMode, selectedFields, sortOrder, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1495,7 +1659,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getRecordedAtTimesAdHocWithHttpInfo(time: Array<string>, webId: Array<string>, retrievalMode?: string, selectedFields?: string, sortOrder?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getRecordedAtTimesAdHocWithHttpInfo(time: Array<string>, webId: Array<string>, retrievalMode?: string, selectedFields?: string, sortOrder?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/recordedattimes';
 
 			let queryParameters = new URLSearchParams();
@@ -1537,6 +1701,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1550,8 +1718,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getSummariesAdHoc(webId: Array<string>, calculationBasis?: string, endTime?: string, filterExpression?: string, sampleInterval?: string, sampleType?: string, selectedFields?: string, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, timeType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamSummaries>  { 
-			return this.getSummariesAdHocWithHttpInfo(webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, extraHttpRequestParams)
+		public getSummariesAdHoc(webId: Array<string>, calculationBasis?: string, endTime?: string, filterExpression?: string, sampleInterval?: string, sampleType?: string, selectedFields?: string, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, timeType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamSummaries>  { 
+			return this.getSummariesAdHocWithHttpInfo(webId, calculationBasis, endTime, filterExpression, sampleInterval, sampleType, selectedFields, startTime, summaryDuration, summaryType, timeType, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1564,7 +1732,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getSummariesAdHocWithHttpInfo(webId: Array<string>, calculationBasis?: string, endTime?: string, filterExpression?: string, sampleInterval?: string, sampleType?: string, selectedFields?: string, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, timeType?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getSummariesAdHocWithHttpInfo(webId: Array<string>, calculationBasis?: string, endTime?: string, filterExpression?: string, sampleInterval?: string, sampleType?: string, selectedFields?: string, startTime?: string, summaryDuration?: string, summaryType?: Array<string>, timeType?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/summary';
 
 			let queryParameters = new URLSearchParams();
@@ -1626,6 +1794,10 @@ export class StreamSetApi {
 				queryParameters.set('timeZone', <any>timeZone);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -1639,8 +1811,8 @@ export class StreamSetApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getValuesAdHoc(webId: Array<string>, selectedFields?: string, time?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
-			return this.getValuesAdHocWithHttpInfo(webId, selectedFields, time, timeZone, extraHttpRequestParams)
+		public getValuesAdHoc(webId: Array<string>, selectedFields?: string, sortField?: string, sortOrder?: string, time?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsStreamValue>  { 
+			return this.getValuesAdHocWithHttpInfo(webId, selectedFields, sortField, sortOrder, time, timeZone, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -1653,7 +1825,7 @@ export class StreamSetApi {
 				});
 		}
 
-		public getValuesAdHocWithHttpInfo(webId: Array<string>, selectedFields?: string, time?: string, timeZone?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getValuesAdHocWithHttpInfo(webId: Array<string>, selectedFields?: string, sortField?: string, sortOrder?: string, time?: string, timeZone?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/streamsets/value';
 
 			let queryParameters = new URLSearchParams();
@@ -1673,12 +1845,24 @@ export class StreamSetApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((sortField !== undefined) && (sortField !== null)) {
+				queryParameters.set('sortField', <any>sortField);
+			}
+
+			if ((sortOrder !== undefined) && (sortOrder !== null)) {
+				queryParameters.set('sortOrder', <any>sortOrder);
+			}
+
 			if ((time !== undefined) && (time !== null)) {
 				queryParameters.set('time', <any>time);
 			}
 
 			if ((timeZone !== undefined) && (timeZone !== null)) {
 				queryParameters.set('timeZone', <any>timeZone);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

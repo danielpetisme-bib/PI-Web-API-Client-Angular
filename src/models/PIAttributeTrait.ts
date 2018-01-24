@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -25,8 +25,9 @@ export class PIAttributeTrait {
 	public IsUOMInherited?: boolean;
 	public RequireNumeric?: boolean;
 	public RequireString?: boolean;
-	public Links?: { [key: string]: string; };
-	constructor(name?: string, abbreviation?: string, allowChildAttributes?: boolean, allowDuplicates?: boolean, isAllowedOnRootAttribute?: boolean, isTypeInherited?: boolean, isUOMInherited?: boolean, requireNumeric?: boolean, requireString?: boolean, links?: { [key: string]: string; })
+	public Links?: Models.PIAttributeTraitLinks;
+	public WebException?: Models.PIWebException;
+	constructor(name?: string, abbreviation?: string, allowChildAttributes?: boolean, allowDuplicates?: boolean, isAllowedOnRootAttribute?: boolean, isTypeInherited?: boolean, isUOMInherited?: boolean, requireNumeric?: boolean, requireString?: boolean, links?: Models.PIAttributeTraitLinks, webException?: Models.PIWebException)
 	{
 		if (name!=null)
 		{
@@ -67,6 +68,10 @@ export class PIAttributeTrait {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

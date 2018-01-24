@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PIEventFrame = (function () {
-    function PIEventFrame(webId, id, name, description, path, templateName, hasChildren, categoryNames, extendedProperties, startTime, endTime, severity, acknowledgedBy, acknowledgedDate, canBeAcknowledged, isAcknowledged, isAnnotated, isLocked, areValuesCaptured, refElementWebIds, security, links) {
+    function PIEventFrame(webId, id, name, description, path, templateName, hasChildren, categoryNames, extendedProperties, startTime, endTime, severity, acknowledgedBy, acknowledgedDate, canBeAcknowledged, isAcknowledged, isAnnotated, isLocked, areValuesCaptured, refElementWebIds, security, links, webException) {
         if (webId != null) {
             this.WebId = webId;
         }
@@ -81,6 +81,9 @@ var PIEventFrame = (function () {
         }
         if (links != null) {
             this.Links = links;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PIEventFrame;

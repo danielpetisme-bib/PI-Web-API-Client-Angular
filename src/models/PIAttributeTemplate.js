@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PIAttributeTemplate = (function () {
-    function PIAttributeTemplate(webId, id, name, description, path, type, typeQualifier, defaultUnitsName, defaultValue, dataReferencePlugIn, configString, isConfigurationItem, isExcluded, isHidden, isManualDataEntry, hasChildren, categoryNames, traitName, links) {
+    function PIAttributeTemplate(webId, id, name, description, path, type, typeQualifier, defaultUnitsName, defaultValue, dataReferencePlugIn, configString, isConfigurationItem, isExcluded, isHidden, isManualDataEntry, hasChildren, categoryNames, traitName, links, webException) {
         if (webId != null) {
             this.WebId = webId;
         }
@@ -72,6 +72,9 @@ var PIAttributeTemplate = (function () {
         }
         if (links != null) {
             this.Links = links;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PIAttributeTemplate;

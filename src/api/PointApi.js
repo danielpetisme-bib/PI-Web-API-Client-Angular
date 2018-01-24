@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ var PointApi = (function () {
         this.basePath = null;
         this.basePath = basePath;
         this.defaultHeaders = defaultHeaders;
-        if (this.defaultHeaders.keys().length == 1) {
+        if (this.defaultHeaders.keys().length == 2) {
             this.withCredentials = true;
         }
         else {
@@ -45,8 +45,8 @@ var PointApi = (function () {
         }
         return objA;
     };
-    PointApi.prototype.getByPath = function (path, selectedFields, extraHttpRequestParams) {
-        return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+    PointApi.prototype.getByPath = function (path, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -56,7 +56,7 @@ var PointApi = (function () {
             }
         });
     };
-    PointApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, extraHttpRequestParams) {
+    PointApi.prototype.getByPathWithHttpInfo = function (path, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/points';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -69,6 +69,9 @@ var PointApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -80,8 +83,8 @@ var PointApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    PointApi.prototype.get = function (webId, selectedFields, extraHttpRequestParams) {
-        return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+    PointApi.prototype.get = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -91,7 +94,7 @@ var PointApi = (function () {
             }
         });
     };
-    PointApi.prototype.getWithHttpInfo = function (webId, selectedFields, extraHttpRequestParams) {
+    PointApi.prototype.getWithHttpInfo = function (webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/points/{webId}'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -101,6 +104,9 @@ var PointApi = (function () {
         }
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
@@ -177,8 +183,8 @@ var PointApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    PointApi.prototype.getAttributes = function (webId, name, nameFilter, selectedFields, extraHttpRequestParams) {
-        return this.getAttributesWithHttpInfo(webId, name, nameFilter, selectedFields, extraHttpRequestParams)
+    PointApi.prototype.getAttributes = function (webId, name, nameFilter, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getAttributesWithHttpInfo(webId, name, nameFilter, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -188,7 +194,7 @@ var PointApi = (function () {
             }
         });
     };
-    PointApi.prototype.getAttributesWithHttpInfo = function (webId, name, nameFilter, selectedFields, extraHttpRequestParams) {
+    PointApi.prototype.getAttributesWithHttpInfo = function (webId, name, nameFilter, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/points/{webId}/attributes'
             .replace('{' + 'webId' + '}', String(webId));
         var queryParameters = new http_1.URLSearchParams();
@@ -208,6 +214,9 @@ var PointApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -219,8 +228,8 @@ var PointApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    PointApi.prototype.getAttributeByName = function (name, webId, selectedFields, extraHttpRequestParams) {
-        return this.getAttributeByNameWithHttpInfo(name, webId, selectedFields, extraHttpRequestParams)
+    PointApi.prototype.getAttributeByName = function (name, webId, selectedFields, webIdType, extraHttpRequestParams) {
+        return this.getAttributeByNameWithHttpInfo(name, webId, selectedFields, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -230,7 +239,7 @@ var PointApi = (function () {
             }
         });
     };
-    PointApi.prototype.getAttributeByNameWithHttpInfo = function (name, webId, selectedFields, extraHttpRequestParams) {
+    PointApi.prototype.getAttributeByNameWithHttpInfo = function (name, webId, selectedFields, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/points/{webId}/attributes/{name}'
             .replace('{' + 'name' + '}', String(name))
             .replace('{' + 'webId' + '}', String(webId));
@@ -245,6 +254,9 @@ var PointApi = (function () {
         if ((selectedFields !== undefined) && (selectedFields !== null)) {
             queryParameters.set('selectedFields', selectedFields);
         }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
+        }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,
             headers: headers,
@@ -256,8 +268,8 @@ var PointApi = (function () {
         }
         return this.http.request(localVarPath, requestOptions);
     };
-    PointApi.prototype.updateAttributeValue = function (webId, name, value, extraHttpRequestParams) {
-        return this.updateAttributeValueWithHttpInfo(webId, name, value, extraHttpRequestParams)
+    PointApi.prototype.getMultiple = function (asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams) {
+        return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams)
             .map(function (response) {
             try {
                 return response.json();
@@ -267,45 +279,7 @@ var PointApi = (function () {
             }
         });
     };
-    PointApi.prototype.updateAttributeValueWithHttpInfo = function (webId, name, value, extraHttpRequestParams) {
-        var localVarPath = this.basePath + '/points/{webId}/attributes/{name}'
-            .replace('{' + 'webId' + '}', String(webId))
-            .replace('{' + 'name' + '}', String(name));
-        var queryParameters = new http_1.URLSearchParams();
-        var headers = new http_1.Headers(this.defaultHeaders.toJSON());
-        if (webId === null || webId === undefined) {
-            throw new Error('Required parameter webId was null or undefined when calling updateAttributeValue.');
-        }
-        if (name === null || name === undefined) {
-            throw new Error('Required parameter name was null or undefined when calling updateAttributeValue.');
-        }
-        if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling updateAttributeValue.');
-        }
-        var requestOptions = new http_2.RequestOptions({
-            method: http_2.RequestMethod.Put,
-            headers: headers,
-            body: JSON.stringify(value),
-            search: queryParameters,
-            withCredentials: this.withCredentials
-        });
-        if (extraHttpRequestParams) {
-            requestOptions = Object.assign(requestOptions, extraHttpRequestParams);
-        }
-        return this.http.request(localVarPath, requestOptions);
-    };
-    PointApi.prototype.getMultiple = function (asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams) {
-        return this.getMultipleWithHttpInfo(asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams)
-            .map(function (response) {
-            try {
-                return response.json();
-            }
-            catch (e) {
-                return {};
-            }
-        });
-    };
-    PointApi.prototype.getMultipleWithHttpInfo = function (asParallel, includeMode, path, selectedFields, webId, extraHttpRequestParams) {
+    PointApi.prototype.getMultipleWithHttpInfo = function (asParallel, includeMode, path, selectedFields, webId, webIdType, extraHttpRequestParams) {
         var localVarPath = this.basePath + '/points/multiple';
         var queryParameters = new http_1.URLSearchParams();
         var headers = new http_1.Headers(this.defaultHeaders.toJSON());
@@ -329,6 +303,9 @@ var PointApi = (function () {
                 var item = webId_1[_a];
                 queryParameters.append('webId', item);
             }
+        }
+        if ((webIdType !== undefined) && (webIdType !== null)) {
+            queryParameters.set('webIdType', webIdType);
         }
         var requestOptions = new http_2.RequestOptions({
             method: http_2.RequestMethod.Get,

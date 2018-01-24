@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class ChannelApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,7 +52,7 @@ export class ChannelApi {
 			return <T1&T2>objA;
 		}
 
-		public instances(extraHttpRequestParams?: any) : Observable<{}>   { 
+		public instances(extraHttpRequestParams?: any) : Observable<Models.PIItemsChannelInstance>  { 
 			return this.instancesWithHttpInfo(extraHttpRequestParams)
 				.map((response: Response) => {
 					try

@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ export class DataServerApi {
 		constructor(protected http: Http, basePath: string, defaultHeaders : Headers) {
 			this.basePath = basePath;
 			this.defaultHeaders = defaultHeaders;
-			if (this.defaultHeaders.keys().length == 1)
+			if (this.defaultHeaders.keys().length == 2)
 			{
 				this.withCredentials = true;
 			}
@@ -52,8 +52,8 @@ export class DataServerApi {
 			return <T1&T2>objA;
 		}
 
-		public list(selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsDataServer>  { 
-			return this.listWithHttpInfo(selectedFields, extraHttpRequestParams)
+		public list(selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsDataServer>  { 
+			return this.listWithHttpInfo(selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -66,7 +66,7 @@ export class DataServerApi {
 				});
 		}
 
-		public listWithHttpInfo(selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public listWithHttpInfo(selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers';
 
 			let queryParameters = new URLSearchParams();
@@ -74,6 +74,10 @@ export class DataServerApi {
 
 			if ((selectedFields !== undefined) && (selectedFields !== null)) {
 				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -89,8 +93,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getByName(name: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
-			return this.getByNameWithHttpInfo(name, selectedFields, extraHttpRequestParams)
+		public getByName(name: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
+			return this.getByNameWithHttpInfo(name, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -103,7 +107,7 @@ export class DataServerApi {
 				});
 		}
 
-		public getByNameWithHttpInfo(name: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByNameWithHttpInfo(name: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers';
 
 			let queryParameters = new URLSearchParams();
@@ -121,6 +125,10 @@ export class DataServerApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -134,8 +142,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getByPath(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
-			return this.getByPathWithHttpInfo(path, selectedFields, extraHttpRequestParams)
+		public getByPath(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
+			return this.getByPathWithHttpInfo(path, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -148,7 +156,7 @@ export class DataServerApi {
 				});
 		}
 
-		public getByPathWithHttpInfo(path: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getByPathWithHttpInfo(path: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers';
 
 			let queryParameters = new URLSearchParams();
@@ -166,6 +174,10 @@ export class DataServerApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -179,8 +191,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public get(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
-			return this.getWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public get(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServer>  { 
+			return this.getWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -193,7 +205,7 @@ export class DataServerApi {
 				});
 		}
 
-		public getWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers/{webId}'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -208,6 +220,10 @@ export class DataServerApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -221,8 +237,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getEnumerationSets(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEnumerationSet>  { 
-			return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, extraHttpRequestParams)
+		public getEnumerationSets(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsEnumerationSet>  { 
+			return this.getEnumerationSetsWithHttpInfo(webId, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -235,7 +251,7 @@ export class DataServerApi {
 				});
 		}
 
-		public getEnumerationSetsWithHttpInfo(webId: string, selectedFields?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getEnumerationSetsWithHttpInfo(webId: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers/{webId}/enumerationsets'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -250,6 +266,10 @@ export class DataServerApi {
 				queryParameters.set('selectedFields', <any>selectedFields);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -263,8 +283,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createEnumerationSet(webId: string, enumerationSet: Models.PIEnumerationSet, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, extraHttpRequestParams)
+		public createEnumerationSet(webId: string, enumerationSet: Models.PIEnumerationSet, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createEnumerationSetWithHttpInfo(webId, enumerationSet, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -277,7 +297,7 @@ export class DataServerApi {
 				});
 		}
 
-		public createEnumerationSetWithHttpInfo(webId: string, enumerationSet: Models.PIEnumerationSet, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createEnumerationSetWithHttpInfo(webId: string, enumerationSet: Models.PIEnumerationSet, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers/{webId}/enumerationsets'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -290,6 +310,10 @@ export class DataServerApi {
 
 			if (enumerationSet === null || enumerationSet === undefined) {
 				throw new Error('Required parameter enumerationSet was null or undefined when calling createEnumerationSet.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -306,8 +330,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public getPoints(webId: string, maxCount?: number, nameFilter?: string, selectedFields?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Models.PIItemsPoint>  { 
-			return this.getPointsWithHttpInfo(webId, maxCount, nameFilter, selectedFields, startIndex, extraHttpRequestParams)
+		public getLicense(webId: string, module: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIDataServerLicense>  { 
+			return this.getLicenseWithHttpInfo(webId, module, selectedFields, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -320,7 +344,61 @@ export class DataServerApi {
 				});
 		}
 
-		public getPointsWithHttpInfo(webId: string, maxCount?: number, nameFilter?: string, selectedFields?: string, startIndex?: number, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public getLicenseWithHttpInfo(webId: string, module: string, selectedFields?: string, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
+			const localVarPath = this.basePath + '/dataservers/{webId}/license'
+				.replace('{' + 'webId' + '}', String(webId));
+
+			let queryParameters = new URLSearchParams();
+			let headers = new Headers(this.defaultHeaders.toJSON());
+
+			if (webId === null || webId === undefined) {
+				throw new Error('Required parameter webId was null or undefined when calling getLicense.');
+			}
+
+			if (module === null || module === undefined) {
+				throw new Error('Required parameter module was null or undefined when calling getLicense.');
+			}
+
+			if ((module !== undefined) && (module !== null)) {
+				queryParameters.set('module', <any>module);
+			}
+
+			if ((selectedFields !== undefined) && (selectedFields !== null)) {
+				queryParameters.set('selectedFields', <any>selectedFields);
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
+			let requestOptions: RequestOptionsArgs = new RequestOptions({
+				method: RequestMethod.Get,
+				headers: headers,
+				search: queryParameters,
+				withCredentials: this.withCredentials,
+			});
+
+			if (extraHttpRequestParams) {
+				requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+			}
+			return this.http.request(localVarPath, requestOptions);
+		}
+
+		public getPoints(webId: string, maxCount?: number, nameFilter?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Models.PIItemsPoint>  { 
+			return this.getPointsWithHttpInfo(webId, maxCount, nameFilter, selectedFields, startIndex, webIdType, extraHttpRequestParams)
+				.map((response: Response) => {
+					try
+					{
+						return response.json()
+					}
+					catch(e)
+					{
+						return {};
+					}
+				});
+		}
+
+		public getPointsWithHttpInfo(webId: string, maxCount?: number, nameFilter?: string, selectedFields?: string, startIndex?: number, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers/{webId}/points'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -347,6 +425,10 @@ export class DataServerApi {
 				queryParameters.set('startIndex', <any>startIndex);
 			}
 
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
+			}
+
 			let requestOptions: RequestOptionsArgs = new RequestOptions({
 				method: RequestMethod.Get,
 				headers: headers,
@@ -360,8 +442,8 @@ export class DataServerApi {
 			return this.http.request(localVarPath, requestOptions);
 		}
 
-		public createPoint(webId: string, pointDTO: Models.PIPoint, extraHttpRequestParams?: any) : Observable<{}>   { 
-			return this.createPointWithHttpInfo(webId, pointDTO, extraHttpRequestParams)
+		public createPoint(webId: string, pointDTO: Models.PIPoint, webIdType?: string, extraHttpRequestParams?: any) : Observable<{}>   { 
+			return this.createPointWithHttpInfo(webId, pointDTO, webIdType, extraHttpRequestParams)
 				.map((response: Response) => {
 					try
 					{
@@ -374,7 +456,7 @@ export class DataServerApi {
 				});
 		}
 
-		public createPointWithHttpInfo(webId: string, pointDTO: Models.PIPoint, extraHttpRequestParams?: any) : Observable<Response>  { 
+		public createPointWithHttpInfo(webId: string, pointDTO: Models.PIPoint, webIdType?: string, extraHttpRequestParams?: any) : Observable<Response>  { 
 			const localVarPath = this.basePath + '/dataservers/{webId}/points'
 				.replace('{' + 'webId' + '}', String(webId));
 
@@ -387,6 +469,10 @@ export class DataServerApi {
 
 			if (pointDTO === null || pointDTO === undefined) {
 				throw new Error('Required parameter pointDTO was null or undefined when calling createPoint.');
+			}
+
+			if ((webIdType !== undefined) && (webIdType !== null)) {
+				queryParameters.set('webIdType', <any>webIdType);
 			}
 
 			let requestOptions: RequestOptionsArgs = new RequestOptions({

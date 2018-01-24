@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -31,8 +31,9 @@ export class PIAnalysisRulePlugIn {
 	public LoadedAssemblyTime?: string;
 	public LoadedVersion?: string;
 	public Version?: string;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, assemblyFileName?: string, assemblyID?: string, assemblyLoadProperties?: Array<string>, assemblyTime?: string, compatibilityVersion?: number, isBrowsable?: boolean, isNonEditableConfig?: boolean, loadedAssemblyTime?: string, loadedVersion?: string, version?: string, links?: { [key: string]: string; })
+	public Links?: Models.PIAnalysisRulePlugInLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, assemblyFileName?: string, assemblyID?: string, assemblyLoadProperties?: Array<string>, assemblyTime?: string, compatibilityVersion?: number, isBrowsable?: boolean, isNonEditableConfig?: boolean, loadedAssemblyTime?: string, loadedVersion?: string, version?: string, links?: Models.PIAnalysisRulePlugInLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -97,6 +98,10 @@ export class PIAnalysisRulePlugIn {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

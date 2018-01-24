@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -20,8 +20,9 @@ export class PIStreamSummaries {
 	public Name?: string;
 	public Path?: string;
 	public Items?: Array<Models.PISummaryValue>;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, name?: string, path?: string, items?: Array<Models.PISummaryValue>, links?: { [key: string]: string; })
+	public Links?: Models.PIStreamSummariesLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, name?: string, path?: string, items?: Array<Models.PISummaryValue>, links?: Models.PIStreamSummariesLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -42,6 +43,10 @@ export class PIStreamSummaries {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

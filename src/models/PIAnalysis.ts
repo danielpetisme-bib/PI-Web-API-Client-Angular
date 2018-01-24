@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -38,8 +38,9 @@ export class PIAnalysis {
 	public TargetWebId?: string;
 	public TemplateName?: string;
 	public TimeRulePlugInName?: string;
-	public Links?: { [key: string]: string; };
-	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, analysisRulePlugInName?: string, autoCreated?: boolean, categoryNames?: Array<string>, groupId?: number, hasNotification?: boolean, hasTarget?: boolean, hasTemplate?: boolean, isConfigured?: boolean, isTimeRuleDefinedByTemplate?: boolean, maximumQueueSize?: number, outputTime?: string, priority?: string, publishResults?: boolean, status?: string, targetWebId?: string, templateName?: string, timeRulePlugInName?: string, links?: { [key: string]: string; })
+	public Links?: Models.PIAnalysisLinks;
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, analysisRulePlugInName?: string, autoCreated?: boolean, categoryNames?: Array<string>, groupId?: number, hasNotification?: boolean, hasTarget?: boolean, hasTemplate?: boolean, isConfigured?: boolean, isTimeRuleDefinedByTemplate?: boolean, maximumQueueSize?: number, outputTime?: string, priority?: string, publishResults?: boolean, status?: string, targetWebId?: string, templateName?: string, timeRulePlugInName?: string, links?: Models.PIAnalysisLinks, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -132,6 +133,10 @@ export class PIAnalysis {
 		if (links!=null)
 		{
 			this.Links=links
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

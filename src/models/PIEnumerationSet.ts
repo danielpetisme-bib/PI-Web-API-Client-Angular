@@ -1,5 +1,5 @@
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -21,9 +21,10 @@ export class PIEnumerationSet {
 	public Name?: string;
 	public Description?: string;
 	public Path?: string;
-	public Links?: { [key: string]: string; };
+	public Links?: Models.PIEnumerationSetLinks;
 	public SerializeDescription?: boolean;
-	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, links?: { [key: string]: string; }, serializeDescription?: boolean)
+	public WebException?: Models.PIWebException;
+	constructor(webId?: string, id?: string, name?: string, description?: string, path?: string, links?: Models.PIEnumerationSetLinks, serializeDescription?: boolean, webException?: Models.PIWebException)
 	{
 		if (webId!=null)
 		{
@@ -52,6 +53,10 @@ export class PIEnumerationSet {
 		if (serializeDescription!=null)
 		{
 			this.SerializeDescription=serializeDescription
+		}
+		if (webException!=null)
+		{
+			this.WebException=webException
 		}
 	}
 }

@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Copyright 2017 OSIsoft, LLC
+* Copyright 2018 OSIsoft, LLC
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 */
 exports.__esModule = true;
 var PIStreamSummaries = (function () {
-    function PIStreamSummaries(webId, name, path, items, links) {
+    function PIStreamSummaries(webId, name, path, items, links, webException) {
         if (webId != null) {
             this.WebId = webId;
         }
@@ -30,6 +30,9 @@ var PIStreamSummaries = (function () {
         }
         if (links != null) {
             this.Links = links;
+        }
+        if (webException != null) {
+            this.WebException = webException;
         }
     }
     return PIStreamSummaries;
