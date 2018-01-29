@@ -1,4 +1,4 @@
-PI Web API client library for Angular 4 (2017 R2)
+PI Web API client library for Angular 5 (2017 R2)
 ===
 
 ## Overview
@@ -10,7 +10,7 @@ It was created following the steps described in this blog post published on PI S
 ## Requirements
 
  - PI Web API 2017 R2 installed within your domain using Kerberos or Basic Authentication. If you are using an older version, some methods might not work.
- - Angular 4.0+
+ - Angular 5.0+
 
 
 ## Installation
